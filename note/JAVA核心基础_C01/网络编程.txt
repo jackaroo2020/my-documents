@@ -1,0 +1,667 @@
+﻿六、网络编程：
+1、网络编程概述
+	(1)网络模型
+		OSI参考模型
+		TCP/IP参考模型
+	(2)网络通讯要素
+		IP地址
+		端口号
+		传输协议
+	(3)网络通讯前提：
+		**找到对方IP
+		**数据要发送到指定端口。为了标示不同的应用程序，所以给这些网络应用程序都用数字进行标示
+		  。这个表示就叫端口。
+		**定义通信规则。这个规则称为通信协议，国际组织定义了通用协议TCP/IP
+	(4)计算机网络：
+		是指将地理位置不同的具有独立功能的多台计算机及其外部设备，
+		通过通信线路连接起来，在网络操作系统，网络管理软件及网络通信协议的管理和协调下，
+		实现资源共享和信息传递的计算机系统。
+	(5)IP地址：
+		IP地址 = 网络号码+主机地址
+
+		A类IP地址:第一段号码为网络号码，剩下的三段号码为本地计算机的号码
+		B类IP地址:前二段号码为网络号码，剩下的二段号码为本地计算机的号码
+		C类IP地址:前三段号码为网络号码，剩下的一段号码为本地计算机的号码
+
+		特殊地址:
+		127.0.0.1 回环地址,可用于测试本机的网络是否有问题. ping 127.0.0.1   
+		ipconfig:查看本机IP地址
+		xxx.xxx.xxx.0 网络地址
+		xxx.xxx.xxx.255 广播地址
+
+		A类	1.0.0.1---127.255.255.254	10.X.X.X是私有地址(私有地址就是在互联网上不使用，而被用在局域网络中的地址)							(2)127.X.X.X是保留地址，用做循环测试用的。
+		B类	128.0.0.1---191.255.255.254	172.16.0.0---172.31.255.255是私有地址。169.254.X.X是保留地址。
+		C类	192.0.0.1---223.255.255.254	192.168.X.X是私有地址
+		D类	224.0.0.1---239.255.255.254 	
+		E类	240.0.0.1---247.255.255.254
+	(6)各种网络分类方式
+		A:按网络覆盖范围划分
+		　　局域网(几米至10公里以内) 　　城域网(10~100公里) 　　广域网(几百公里到几千公里) 　　国际互联网
+		B:按网络拓扑结构划分
+		　　总线型网络 　　星形网络 　　环型网络 　　树状网络 　　混合型网络
+		C:按传输介质划分
+		　　有线网 　　无线网
+		D:按网络使用性质划分
+		　　公用网 　　专用网
+	(7)虚拟专用网络（Virtual Private Network ，简称VPN)指的是在公用网络上建立专用网络的技术。
+		其之所以称为虚拟网，主要是因为整个VPN网络的任意两个节点之间的连接并没有传统专网
+		所需的端到端的物理链路，而是架构在公用网络服务商所提供的网络平台，如Internet、
+		ATM(异步传输模式〉、Frame Relay （帧中继）等之上的逻辑网络，
+		用户数据在逻辑链路中传输。它涵盖了跨共享网络或公共网络的封装、
+		加密和身份验证链接的专用网络的扩展。VPN主要采用了隧道技术、加解密技术、
+		密钥管理技术和使用者与设备身份认证技术。
+	(8)网络模型：
+		****OSI模型
+			应用层
+			表示层
+			会话层
+			传输层
+			网络层
+			数据连接层
+			物理层
+		****TCP/IP模型
+			应用层
+			传输层
+			网际层
+			主机至网络层
+2、TCP和UDP
+	(1)UDP和TCP的区别：
+		UDP
+		将数据及源和目的封装成数据包中，不需要建立连接
+		每个数据报的大小在限制在64k内
+		因无连接，是不可靠协议
+		不需要建立连接，速度快
+		TCP
+		建立连接，形成传输数据的通道。
+		在连接中进行大数据量传输
+		通过三次握手完成连接，是可靠协议
+		必须建立连接，效率会稍低
+		注：三次握手：
+		第一次：我问你在么？
+		第二次：你回答在。
+		第三次：我反馈哦我知道你在。
+3、Socket(UDP传输)
+	**Socket就是为网络服务提供的一种机制。
+	**通信的两端都有Socket。
+	**网络通信其实就是Socket间的通信。
+	**数据在两个Socket间通过IO传输。
+	**玩Socket主要就是记住流程，代码查文档就行
+	(1)UDP传输：DatagramSocket与DatagramPacket
+		**发送端：
+		建立DatagramSocket服务；
+		提供数据，并将数据封装到字节数组中；
+		创建DatagramPacket数据包，并把数据封装到包中，同时指定IP和接收端口
+		通过Socket服务，利用send方法将数据包发送出去；
+		关闭DatagramSocket和DatagramPacket服务。
+		**接收端：
+		建立DatagramSocket服务，并监听一个端口；
+		定义一个字节数组和一个数据包，同时将数组封装进数据包；
+		通过DatagramPacket的receive方法，将接收的数据存入定义好的数据包；
+		通过DatagramPacke关闭t的方法，获取发送数据包中的信息；
+		关闭DatagramSocket和DatagramPacket服务。
+		DatagramSocket与DatagramPacket方法摘要：
+		*****DatagramSocket
+		构造方法：
+		DatagramSocket() 
+			构造数据报套接字并将其绑定到本地主机上任何可用的端口。
+		DatagramSocket(int port) 
+			创建数据报套接字并将其绑定到本地主机上的指定端口。 
+		DatagramSocket(int port, InetAddress laddr) 
+			创建数据报套接字，将其绑定到指定的本地地址。 
+		方法摘要:
+		void close() 
+			关闭此数据报套接字。
+		InetAddress getInetAddress() 
+			返回此套接字连接的地址。 
+		InetAddress getLocalAddress() 
+			获取套接字绑定的本地地址。
+		int getPort() 
+			返回此套接字的端口。 
+		void receive(DatagramPacket p) 
+			从此套接字接收数据报包。 
+		void send(DatagramPacket p) 
+			从此套接字发送数据报包。
+		****DatagramPacket
+		构造方法：
+		DatagramPacket(byte[] buf, int length) 
+			构造 DatagramPacket，用来接收长度为 length 的数据包。
+		DatagramPacket(byte[] buf, int length, InetAddress address, int port) 
+			构造数据报包，用来将长度为 length 的包发送到指定主机上的指定端口号。
+		InetAddress getAddress() 
+			返回某台机器的 IP 地址，此数据报将要发往该机器或者是从该机器接收到的。 
+		byte[] getData() 
+			返回数据缓冲区。 
+		int getLength() 
+			返回将要发送或接收到的数据的长度。
+		int getPort() 
+			返回某台远程主机的端口号，此数据报将要发往该主机或者是从该主机接收到的。	
+		代码示例：
+		****发送端：
+		class UDPSend
+		{
+			public static void main(String[] args) throws Exception
+			{
+				DatagramSocket ds = new DatagramSocket();
+				byte[] buf = "这是UDP发送端".getBytes();
+				DatagramPacket dp = new DatagramPacket(
+					buf,buf.length,InetAddress.getByName("192.168.1.253"),10000);
+				ds.send(dp);
+				ds.close();
+			}
+		}
+		****接收端
+		class UDPRece
+		{
+			public static void main(String[] args) throws Exception
+			{
+				DatagramSocket ds = new DatagramSocket(10000);
+				byte[] buf = new byte[1024];
+				DatagramPacket dp = new DatagramPacket(buf,buf.length);
+				ds.receive(dp);//将发送端发送的数据包接收到接收端的数据包中
+				String ip = dp.getAddress().getHosyAddress();//获取发送端的ip
+				String data = new String(dp.getData(),0,dp.getLength());//获取数据
+				int port = dp.getPort();//获取发送端的端口号
+				sop(ip+":"+data+":"+port);
+				ds.close();
+			}
+		}
+		需求1：UDP键盘录入数据，并发送给接收端
+		发送端：
+		class UDPSend
+		{
+			public static void main(String[] args) throws Exception
+			{
+
+				DatagramSocket ds = new DatagramSocket();
+				BufferedReader bufr = new BufferedReader(new InputStreamReader(System.in));
+				String line = null;
+				while((line = bufr.readLine())!=null)
+				{
+					if("886".equals(line))
+						break;
+					byte[] buf = line.getBytes();
+					DatagramPacket dp = new DatagramPacket(
+						buf,buf.length,InetAddress.getByName("192.168.1.253"),10000);
+					ds.send(dp);
+				}
+				ds.close();
+			}
+				
+		}
+		接收端：
+		class UDPRece
+		{
+			public static void main(String[] args) throws Exception
+			{
+				DatagramSocket ds = new DatagramSocket(10000);
+				while(true)
+				{
+					byte[] buf = new byte[1024];
+					DatagramPacket dp = new DatagramPacket(buf,buf.length);
+					ds.receive(dp);//将发送端发送的数据包接收到接收端的数据包中
+					String ip = dp.getAddress().getHosyAddress();//获取发送端的ip
+					String data = new String(dp.getData(),0,dp.getLength());//获取数据
+					int port = dp.getPort();//获取发送端的端口号
+					sop(ip+":"+data+":"+port);
+					ds.close();
+				}
+			}
+			
+		}
+		需求2：编写简单的聊天工具
+		思路：
+			使用多线程技术
+		发送端：
+		class UDPSend implements Runnable
+		{
+			private DatagramSocket ds;
+			public UDPSend(){}
+			public UDPSend(DatagramSocket ds)
+			{
+				this.ds=ds;
+			}
+			public void run()
+			{
+				try
+				{
+					BufferedReader bufr = new BufferedReader(
+								new InputStreamReader(System.in));
+					String line = null;
+					while((line = bufr.readLine())!=null)
+					{
+						if("886".equals(line))
+							break;
+						byte[] buff = line.getBytes();
+						DatagramPacket dp = new DatagramPacket(
+						buf,buf.length,InetAddress.getByName("192.168.1.253"),10000);
+						ds.send(dp);
+					}
+				}
+				catch(Exception e)
+				{
+					throw new RuntimeException("发送失败");
+				}
+			}
+		}
+		接收端：
+		class UDPRece implements Runnable
+		{
+			private DatagramSocket ds;
+			public UDPSend(){}
+			public UDPSend(DatagramSocket ds)
+			{
+				this.ds=ds;
+			}
+			public void run()
+			{
+				try
+				{
+					while(true)
+					{	
+						byte[] buf = new byte[1024];
+						DatagramPacket dp = new DatagramPacket(buf,buf.length);
+						ds.receive(dp);//将发送端发送的数据包接收到接收端的数据包中
+						String ip = dp.getAddress().getHosyAddress();//获取发送端的ip
+						String data = new String(dp.getData(),0,dp.getLength());//获取数据
+						int port = dp.getPort();//获取发送端的端口号
+						sop(ip+":"+data+":"+port);		
+					}
+				}
+				catch(Exception e)
+				{
+					throw new RuntimeException("接收失败");
+				}
+			}
+		}
+		测试类：
+		class UDPTest
+		{
+			public static void main(String[] args)
+			{
+				DatagramSocket sendSocket = new DatagramSocket();
+				DatagramSocket receSocket = new DatagramSocket(10000);
+
+				new Thread(new UDPSend(sendSocket)).start();
+				new Thread(new UDPRece(receSocket)).start();
+			}
+		}
+	(2)TCP传输
+		Socket和ServerSocket
+		建立客户端和服务器端
+		建立连接后，通过Socket中的IO流进行数据的传输
+		关闭socket
+		同样，客户端与服务器端是两个独立的应用程序。
+		****Socket
+		**构造方法：
+		Socket() 
+			通过系统默认类型的 SocketImpl 创建未连接套接字
+		Socket(InetAddress address, int port) 
+			创建一个流套接字并将其连接到指定 IP 地址的指定端口号。
+		Socket(String host, int port) 
+			创建一个流套接字并将其连接到指定主机上的指定端口号。
+		**方法摘要：
+		void close() 
+			关闭此套接字。
+		InetAddress getInetAddress() 
+			返回套接字连接的地址。
+		InputStream getInputStream() 
+			返回此套接字的输入流。
+		OutputStream getOutputStream() 
+			返回此套接字的输出流。 
+		int getPort() 
+			返回此套接字连接到的远程端口。
+		void shutdownInput() 
+			此套接字的输入流置于“流的末尾”。 
+		void shutdownOutput() 
+			禁用此套接字的输出流。 
+		String toString() 
+			将此套接字转换为 String。
+		****ServerSocket
+		**构造方法：
+		ServerSocket() 
+			创建非绑定服务器套接字。 
+		ServerSocket(int port) 
+			创建绑定到特定端口的服务器套接字。
+		方法摘要：
+		Socket accept() 
+			侦听并接受到此套接字的连接。
+		void close() 
+			关闭此套接字。 
+		InetAddress getInetAddress() 
+			返回此服务器套接字的本地地址。
+		****TCP传输流程：
+		**客户端：
+		建立Socket服务，并制定要连接的主机和端口；
+		获取Socket流中的输出流OutputStream，将数据写入流中，通过网络发送给服务端；
+		获取Socket流中的输出流InputStream，获取服务端的反馈信息；
+		关闭资源。
+		**服务端：
+		建立ServerSocket服务，并监听一个端口；
+		通过ServerSocket服务的accept方法，获取Socket服务对象；
+		使用客户端对象的读取流获取客户端发送过来的数据；
+		通过客户端对象的写入流反馈信息给客户端；
+		关闭资源；
+		****代码示例：
+		客户端：
+		class TCPClient
+		{
+			public static void main(String[] args)
+			{
+				Socket s = new Socket("192.168.1.253",10000);
+				OutputStream os = s.getOutputStream();
+				out.write("这是TCP发送的数据".getBytes());
+				s.close();
+			}
+		}
+		服务端：
+		class TCPServer
+		{
+			public static void main(String[] args)
+			{
+				ServerSocket ss = new ServerSocket(10000);
+				Socket s = ss.accept();
+
+				String ip = s.getInetAddress().getHostAddress();
+				sop(ip);
+
+				InputStream is = s.getInputStream();
+				byte[] buf = new byte[1024];
+				int len = is.read(buf);
+				sop(new String(buf,0,len));
+				s.close();
+				ss.close();
+			}
+		}
+		TCP需求1：客户端给服务端发送数据，服务端接收到后反馈信息给客户端
+		客户端：
+		class TCPClient
+		{
+			public static void main(String[] args)
+			{
+				Socket s = new Socket("192.168.1.253",10000);
+				OutputStream os = s.getOutputStream();
+				out.write("这是TCP发送的数据".getBytes());
+				
+				InputStream is = s.getInputStream();
+				byte[] buf = new byte[1024];
+				int len = is.read(buf);
+				sop(new String(buf,0,len));
+				s.close();
+			}
+		}
+		服务端：
+		class TCPServer
+		{
+			public static void main(String[] args)
+			{
+				ServerSocket ss = new ServerSocket(10000);
+				Socket s = ss.accept();
+
+				String ip = s.getInetAddress().getHostAddress();
+				sop(ip);
+
+				InputStream is = s.getInputStream();
+				byte[] buf = new byte[1024];
+				int len = is.read(buf);
+				sop(new String(buf,0,len));
+
+				OutputStream os = s.getOutputStream();
+				out.write("这是TCP发送的数据".getBytes());
+
+				s.close();
+				ss.close();
+			}
+		}
+		TCP需求2：建立一个文本转换服务端，客户给服务端发送文本，服务端将数据转换成大写后返回给客户端
+			  当客户端输入over时，转换结束
+		客户端：
+		class TCPClient
+		{
+			public static void main(String[] args)
+			{
+				Socket s = new Socket("192.168.1.253",10000);
+				BufferedReader bufr = new BufferedReader(new InputStreamReader(System.in));
+				BufferedWriter bufOut = new BufferedWriter(new OutputStreamWriter(
+										s.getOutputStream()));
+				BufferedReader bufIn = new BufferedReader(new InputStreamReader(
+										s.getInputStream()));
+				String line = null;
+				while((line = bufr.readLine())!=null)
+				{
+					if("over".equals(line))
+						break;
+					bufOut.write(line);
+					bufOut.newLine();
+					bufOut.flush();
+					String retVal = bufIn.readLine();
+					sop("server:"+retVal);
+				}
+				bufr.close();
+				s.close();
+			}
+		}
+		服务端：
+		class TCPServer
+		{
+			public static void main(String[] args)
+			{
+				ServerSocket ss = new ServerSocket(10000);
+				Socket s = ss.accept();
+
+				String ip = s.getInetAddress().getHostAddress();
+				sop(ip);
+				
+				BufferedReader bufIn = new BufferedReader(new InputStreamReader(
+										s.getInputStream()));
+				BufferedWriter bufOut = new BufferedWriter(new OutputStreamWriter(
+										s.getOutputStream()));
+
+				while((line = bufIn.readLine())!=null)
+				{
+					bufOut.write(line.toUpperCase());
+					bufOut.newLine();
+					bufOut.flush();
+				}
+				s.close();
+				ss.close();
+			}
+		}
+		**需求3：拷贝文件
+		客户端：
+		class TCPClient
+		{
+			public static void main(String[] args)
+			{
+				Socket s = new Socket("192.168.1.253",10000);
+				BufferedReader bufr = new BufferedReader(new FileReader("g:\\demo.txt"));
+				PrintWriter pw = new PrintWriter(s.getOutputStream(),true);
+				String line = null;
+				while((line = bufr.readLine())!=null)
+				{
+					pw.println();
+				}
+				s.shutDownOutput();
+				BufferedReader bufIn = new BufferedReader(new InputStreamReader(
+										s.getInputStream()));
+				String retVal = bufIn.readLine();
+				sop(retVal);
+				bufr.close();
+				s.close();
+			}
+		}
+		服务端：
+		class TCPServer
+		{
+			public static void main(String[] args)
+			{
+				ServerSocket ss = new ServerSocket(10000);
+				Socket s = ss.accept();
+
+				String ip = s.getInetAddress().getHostAddress();
+				sop(ip);
+				
+				BufferedReader bufIn = new BufferedReader(new InputStreamReader(
+										s.getInputStream()));
+				PrintWriter out = new PrintWriter(new FileWriter"copy.txt",true);
+				String line =null;
+				while((line = bufIn.readLine())!=null)
+				{
+					out.write(line);
+				}
+				PrintWriter pw = new PrintWriter(s.getOutputStream(),true);
+				pw.println("上传成功");
+				out.close();
+				s.close();
+				ss.close();
+			}
+		}
+		需求4：上传图片
+		客户端：
+		class TCPClient
+		{
+			public static void main(String[] args)
+			{
+				Socket s = new Socket("192.168.1.253",10000);
+				FileInputStream fis = new FileInputStream("g:\\1.bmp");
+				OutputStream out = s.getOutputStream();
+				byte[] buf = new byte[1024];
+				int len = 0;
+				while((len = bufr.read())!=-1)
+				{
+					out.write(buf,0,len);
+				}
+				s.shutDownOutput();
+
+				InputStream in = s.getInputStream();
+				byte[] bufIn = new byte[1024];
+				int lenIn = in.read(bufIn);
+				sop(new String(bufIn,0,lenIn);
+				fis.close();
+				s.close();
+			}
+		}
+		服务端：
+		class TCPServer
+		{
+			public static void main(String[] args)
+			{
+				ServerSocket ss = new ServerSocket(10000);
+				Socket s = ss.accept();
+
+				String ip = s.getInetAddress().getHostAddress();
+				sop(ip);
+				FileOutputStream fos = new FileOutputStream("g:\\copy.bmp");
+				InputStream in = s.getInputStream();
+				byte[] bufIn = new byte[1024];
+				int lenIn = 0;
+				while((lenIn=bufIn.read())!=-1)
+				{
+					fos.write(bufIn,0,lenIn)
+				}
+
+				OutputStream outIn = s.getOutputStream();
+				outIn.write("上传成功".getBytes());
+				fos.close();
+				s.close();
+				ss.close();
+			}
+		}
+		需求5：客户端并发登陆
+			客户端通过键盘录入用户名，服务端对这个用户名进行校验
+			如果用户存在，在服务端现实xxx已登录，并在客户端现实欢迎xxx
+			如果用户不存在，在服务端现实xxx正在尝试登陆，并在客户端现实xxx用户不存在
+			最多登陆三次。
+		校验端：
+		class User implements Runnable
+		(
+			private Socket s;
+			public User(){}
+			public User(Socket s)
+			{
+				this.s=s;
+			}
+			public void run()
+			{
+				try
+				{
+					BufferedReader bufrIn = new BufferedReader(
+							new InputStream(s.getInputStream()))
+					String name = bufrIn.readLine();
+					if(name==null)
+					{
+						sop("用户名为空");
+						break;
+					}
+					BufferedReader bufr = new BufferedReader(
+							new FileReader("user.txt"));
+					PrintWriter pw = new PrintWriter(s.getOutputStream(),true);
+					String line = null;
+					boolean flag = false;
+					while((line = bufr.reanLine())!=null)
+					{
+						if(line.equals(name))
+						{
+							flag = true;
+							break;
+						}
+						if(flag)
+						{
+							sop(name+"已登陆");
+							pw.println("欢迎"+name);
+							break;
+						}
+						else
+						{
+							sop(name+"正尝试登陆");
+							pw.println(name+"用户不存在");
+						}
+
+					}
+					s.close();
+				}
+				catch(Exception e)
+				{
+					throw new RuntimeException("用户校验失败");
+				}
+			}
+		)
+		客户端：
+		class LoginClient
+		{
+			public static void main(String[] args)
+			{
+				Socket s = new Socket("192.168.1.253",10000);
+				BufferedReader bufr = new BufferedReader(
+							new InputStreamReader(System.in)));
+				PrintWriter out = new PrintWriter(s.getOutputStream(),true);
+				BufferedReader bufIn = new BufferedReader(
+							new InputStreamReader(s.getInputStream()));
+				for(int i=0;i<3;i++)
+				{
+					String line = bufr.readLine();
+					if(line == null)
+					{
+						sop("用户名不能为空！");
+						break;
+					}
+					out.write(line);
+					String retVal = bufIn.readLine();
+					sop(retVal);	
+				}
+				bufr.close();
+				s.close();
+			}
+		}
+		服务端：
+		class LoginServer
+		{
+			public static void main(String[] args)
+			{
+				ServerSocket ss = new ServerSocket(10000);
+				while(true)
+				{
+					Socket s = ss.accept();
+					new Thread(new User()).start();
+				}
+			}
+		}

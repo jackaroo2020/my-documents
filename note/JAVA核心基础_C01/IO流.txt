@@ -1,0 +1,951 @@
+﻿五、IO流
+1、IO流概述
+	(1)用来处理设备(硬盘，控制台，内存)间的数据。
+	(2)java中对数据的操作都是通过流的方式。
+	(3)java用于操作流的类都在io包中。
+	(4)按照流操作的数据的类型不同：分为字节流和字符流。字符流是为了方便中文的操作而来的。	
+	(5)按照流的流向不同分为：输入流，输出流
+2、IO流常用基类：
+	(1)字节流
+		输出字节流：OutputStream：字节写入流抽象类
+				|--->FileOutputStream：
+							字节写入流
+				|--->BufferedOutputStream：
+							字节写入流缓冲区
+				|--->PrintStream：
+							打印流
+		输入字节流：InputStream：字节读取流抽象类
+				|--->FileInputStream：
+							字节读取流
+				|--->BufferedInputStream：
+							字节读取流缓冲区
+	(2)字符流	
+		输出字符流：Writer：字符写入流的抽象
+				|--->FileWriter：
+							字符写入流
+				|--->BufferedWriter：
+							字符写入流缓冲区
+				|--->OutputStreamWriter：
+							字符通向字节的转换流(涉及键盘录入时用)
+				|--->OutputStreamWriter：	
+							打印流，可处理各种类型的数据
+		输入字符流：Reader: 字符读取流的抽象类
+				|--->FileReader：
+							字符读取流
+					|--->LineNumberReader：
+								跟踪行号的缓冲字符读取流
+				|--->BufferedReader：
+							字符读取流缓冲区
+				|--->InputStreamReader：
+							字节通向字符的转换流(涉及键盘录入时用)
+	(3)IO流常用基类方法摘要：
+		**字节写入流：OutputStream：
+			void close() 关闭此输出流并释放与此流有关的所有系统资源。
+			void flush()刷新此输出流并强制写出所有缓冲的输出字节。
+			abstract  void write(int b)  将指定的字节写入此输出流。
+			void write(byte[] b) 将 b.length 个字节从指定的 byte 数组写入此输出流。    
+			void write(byte[] b, int off, int len) 
+					将指定 byte 数组中从偏移量 off 开始的 len 个字节写入此输出流。 
+		**字节读取流：InputStream：
+			void close() 关闭此输入流并释放与该流关联的所有系统资源。
+			int available() (特有方法！！)
+				返回此输入流下一个方法调用可以不受阻塞地从此输入流读取（或跳过）的估计字节数。 
+			abstract  int read() 从输入流中读取数据的下一个字节。 
+			int read(byte[] b) 从输入流中读取一定数量的字节，并将其存储在缓冲区数组 b 中。
+			int read(byte[] b, int off, int len)  将输入流中最多 len 个数据字节读入 byte 数组。
+			long skip(long n) 跳过和丢弃此输入流中数据的 n 个字节。
+           
+	 
+           
+         
+
+			
+		**字符写入流：Writer：
+			abstract  void close() 关闭此流，但要先刷新它。
+			abstract  void flush() 刷新该流的缓冲。
+			void write(int c) 写入单个字符。
+			void write(char[] cbuf) 写入字符数组。          
+			abstract  void write(char[] cbuf, int off, int len) 写入字符数组的某一部分。 
+			void write(String str) 写入字符串。 
+			void write(String str, int off, int len) 写入字符串的某一部分。 
+
+		**字符读取流：Reader：
+			abstract  void close() 关闭该流并释放与之关联的所有资源。
+			int read() 读取单个字符。
+			int read(char[] cbuf)  将字符读入数组
+			abstract  int read(char[] cbuf, int off, int len) 将字符读入数组的某一部分。
+			long skip(long n)  跳过字符。 
+3、IO流常用字节流基类的子类：
+	**写入流：
+	(1)FileOutputStream：
+		**构造方法：
+		FileOutputStream(String name) 
+			创建一个向具有指定名称的文件中写入数据的输出文件流。
+		FileOutputStream(String name, boolean append) 
+			创建一个向具有指定 name 的文件中写入数据的输出文件流。
+		FileOutputStream(File file) 
+			创建一个向指定 File 对象表示的文件中写入数据的文件输出流。 
+		FileOutputStream(File file, boolean append) 
+			创建一个向指定 File 对象表示的文件中写入数据的文件输出流。
+		**方法摘要：
+		public void flush()
+		void close() 关闭此文件输出流并释放与此流有关的所有系统资源。
+		void write(int b) 将指定字节写入此文件输出流。
+		void write(byte[] b, int off, int len) 
+			将指定 byte 数组中从偏移量 off 开始的 len 个字节写入此文件输出流。 
+		void write(int b) 将指定字节写入此文件输出流。
+	(2)BufferedOutputStream：
+		**构造方法：
+		BufferedOutputStream(OutputStream out) 
+			创建一个新的缓冲输出流，以将数据写入指定的底层输出流。 
+		BufferedOutputStream(OutputStream out, int size) 
+			创建一个新的缓冲输出流，以将具有指定缓冲区大小的数据写入指定的底层输出流。 
+		**方法摘要：
+		void flush() 刷新此缓冲的输出流。          
+		void write(byte[] b, int off, int len) 
+			将指定 byte 数组中从偏移量 off 开始的 len 个字节写入此缓冲的输出流。 
+		void write(int b) 将指定的字节写入此缓冲的输出流。
+	(3)PrintStream：打印流，可将各种类型的数据原样打印，有自动刷新功能
+		**构造方法：
+		PrintStream(String fileName) 
+			创建具有指定文件名称且不带自动行刷新的新打印流。
+		PrintStream(File file) 
+			创建具有指定文件且不带自动行刷新的新打印流。
+		PrintStream(OutputStream out) 
+			创建新的打印流。
+		PrintStream(OutputStream out, boolean autoFlush) (当autoFlush为true时具有自动刷新功能)
+			创建新的打印流。
+		**方法摘要：
+		PrintStream append(char c) 
+			将指定字符添加到此输出流。
+		void close() 
+			关闭流。 
+		void flush() 
+			刷新该流的缓冲。
+		void print(各种类型的数据：) 
+			打印各种类型的数据 
+		void println(各种类型的数据：)：自动换行
+			打印各种类型的数据 
+		void write(byte[] buf, int off, int len) 
+			将 len 字节从指定的初始偏移量为 off 的 byte 数组写入此流。 
+		void write(int b) 
+			将指定的字节写入此流。 
+
+	**读取流：
+	(1)FileInputStream：
+		**构造方法：
+		FileInputStream(String name) 
+			通过打开一个到实际文件的连接来创建一个 FileInputStream，
+			该文件通过文件系统中的路径名 name 指定。
+		FileInputStream(File file) 
+			通过打开一个到实际文件的连接来创建一个 FileInputStream，
+			该文件通过文件系统中的 File 对象 file 指定。
+		**方法摘要：
+		int available() (字节读取流特有方法！！！)
+			返回下一次对此输入流调用的方法可以不受阻塞地从此输入流读取（或跳过）的估计剩余字节数。
+		int read() 
+			从此输入流中读取一个数据字节。 
+		int read(byte[] b) 
+			从此输入流中将最多 b.length 个字节的数据读入一个 byte 数组中。 
+		int read(byte[] b, int off, int len) 
+			从此输入流中将最多 len 个字节的数据读入一个 byte 数组中。 
+		long skip(long n) 
+			从输入流中跳过并丢弃 n 个字节的数据。 
+	(2)BufferedInputStream:
+		**构造方法：
+		BufferedInputStream(InputStream in) 
+			创建一个 BufferedInputStream 并保存其参数，即输入流 in，以便将来使用。 
+		BufferedInputStream(InputStream in, int size) 
+			创建具有指定缓冲区大小的 BufferedInputStream 并保存其参数，即输入流 in，以便将来使用。 
+		**方法摘要：
+		int available() (字节读取流特有方法！！！)
+			返回可以从此输入流读取（或跳过）、且不受此输入流接下来的方法调用阻塞的估计字节数。 
+		int read() 
+			参见 InputStream 的 read 方法的常规协定。 
+		int read(byte[] b, int off, int len) 
+			从此字节输入流中给定偏移量处开始将各字节读取到指定的 byte 数组中。 
+		long skip(long n) 
+			参见 InputStream 的 skip 方法的常规协定。
+	
+4、字符流常用基类的子类
+	**写入流：
+	(1)FileWriter:
+		**构造方法：
+		FileWriter(String fileName) 
+			根据给定的文件名构造一个 FileWriter 对象。 
+		FileWriter(String fileName, boolean append) 
+			根据给定的文件名以及指示是否附加写入数据的 boolean 值来构造 FileWriter 对象。 
+		FileWriter(File file) 
+			根据给定的 File 对象构造一个 FileWriter 对象。 
+		FileWriter(File file, boolean append) 
+			根据给定的 File 对象构造一个 FileWriter 对象。 
+		FileWriter(FileDescriptor fd) 
+			构造与某个文件描述符相关联的 FileWriter 对象。
+		**方法摘要：跟Writer一样
+		abstract  void close() 关闭此流，但要先刷新它。
+		abstract  void flush() 刷新该流的缓冲。
+		void write(int c) 写入单个字符。
+		void write(char[] cbuf) 写入字符数组。          
+		abstract  void write(char[] cbuf, int off, int len) 写入字符数组的某一部分。 
+		void write(String str) 写入字符串。 
+		void write(String str, int off, int len) 写入字符串的某一部分。 
+	(2)BufferedWriter:
+		**构造方法：
+		BufferedWriter(Writer out) 
+			创建一个使用默认大小输出缓冲区的缓冲字符输出流。 
+		BufferedWriter(Writer out, int sz) 
+			创建一个使用给定大小输出缓冲区的新缓冲字符输出流。 
+		**方法摘要：
+		void close() 
+			关闭此流，但要先刷新它。 
+		void flush() 
+			 刷新该流的缓冲。 
+		void newLine() 
+			 写入一个行分隔符。 
+		void write(char[] cbuf, int off, int len) 
+			 写入字符数组的某一部分。 
+		void write(int c) 
+			 写入单个字符。 
+		void write(String s, int off, int len) 
+			 写入字符串的某一部分。 
+	(3)OutputStreamWriter：字节通向字符的转换流
+		**构造方法：
+		OutputStreamWriter(OutputStream out) 
+			创建使用默认字符编码的 OutputStreamWriter。
+		**方法摘要：
+		void write(char[] cbuf, int off, int len) 
+			写入字符数组的某一部分。 
+		void write(int c) 
+			写入单个字符。 
+		void write(String str, int off, int len) 
+			写入字符串的某一部分。
+	(4)PrintWriter:
+		**构造方法：
+		PrintWriter(String fileName) 
+			创建具有指定文件名称且不带自动行刷新的新 PrintWriter。
+		PrintWriter(File file) 
+			使用指定文件创建不具有自动行刷新的新 PrintWriter。
+		PrintWriter(Writer out) 
+			创建不带自动行刷新的新 PrintWriter。 
+		PrintWriter(Writer out, boolean autoFlush) 
+			创建新 PrintWriter。 
+		PrintWriter(OutputStream out) 
+			根据现有的 OutputStream 创建不带自动行刷新的新 PrintWriter。 
+		PrintWriter(OutputStream out, boolean autoFlush) 
+			通过现有的 OutputStream 创建新的 PrintWriter。
+		
+		**方法摘要：
+		PrintWriter append(char c) 
+			将指定字符添加到此 writer。 
+		void print(各种类型的数据：) 
+			打印各种类型的数据 
+		void println(各种类型的数据：)：自动换行
+			打印各种类型的数据
+		void write(char[] buf) 
+			写入字符数组。 
+		void write(char[] buf, int off, int len) 
+			写入字符数组的某一部分。 
+		void write(int c) 
+			写入单个字符。 
+		void write(String s) 
+			写入字符串。 
+		void write(String s, int off, int len) 
+			写入字符串的某一部分。 
+	**读取流：
+	(1)FileReader:
+		**构造方法：
+		FileReader(String fileName) 
+			在给定从中读取数据的文件名的情况下创建一个新 FileReader。
+		FileReader(File file) 
+			在给定从中读取数据的 File 的情况下创建一个新 FileReader。 
+		FileReader(FileDescriptor fd) 
+			在给定从中读取数据的 FileDescriptor 的情况下创建一个新 FileReader。 
+		**方法摘要：和Reader基类方法一致：
+		abstract  void close() 关闭该流并释放与之关联的所有资源。
+		int read() 读取单个字符。
+		int read(char[] cbuf)  将字符读入数组
+		abstract  int read(char[] cbuf, int off, int len) 将字符读入数组的某一部分。
+		long skip(long n)  跳过字符。 
+	(2)BufferedReader:
+		**构造方法：
+		BufferedReader(Reader in) 
+			创建一个使用默认大小输入缓冲区的缓冲字符输入流。
+		**方法摘要：
+		int read() 
+			读取单个字符。 
+		int read(char[] cbuf, int off, int len) 
+			将字符读入数组的某一部分。 
+		String readLine() 
+			读取一个文本行。 
+	(3)InputStreamReader：字符通向字节的桥梁：
+		**构造方法：
+		InputStreamReader(InputStream in) 
+			创建一个使用默认字符集的 InputStreamReader。
+		**方法摘要:
+		int read() 读取单个字符。
+		int read(char[] cbuf)  将字符读入数组
+		abstract  int read(char[] cbuf, int off, int len) 将字符读入数组的某一部分。
+		long skip(long n)  跳过字符。
+	(4)LineNumberReader：
+		**构造方法：
+		LineNumberReader(Reader in) 
+			使用默认输入缓冲区的大小创建新的行编号 reader。
+		**方法摘要：
+		int read() 
+			读取单个字符。 
+		int read(char[] cbuf, int off, int len) 
+			将字符读入数组中的某一部分。 
+		String readLine() 
+			读取文本行。
+		long skip(long n) 
+			跳过字符。 
+		int getLineNumber() 
+			获得当前行号。 
+		void setLineNumber(int lineNumber) 
+			设置当前行号。 
+6、IO流常见需求：
+****字符流：
+	(1)需求1：在硬盘上创建一个文件并写入信息
+		用字符写入流：FileWriter
+		FileWriter fw = new FileWriter("g:\\filewriter.txt");
+		fw.write("输入信息");
+		fw.write("也可以写入字符数组".toCharArray());
+		fw.flush();
+		fw.close();
+	(2)需求2：在原有文件上续写数据
+		FileWriter fw = new FileWriter("g:\\filewriter.txt",true);
+		fw.write("还可以续写信息");
+		fw.write("也可以写入字符数组".toCharArray());
+		fw.flush();
+		fw.close();
+	(3)需求3：读取硬盘上的文本文件，并将数据打印在控制台
+		FileReader fr = new FileReader("g:\\filewriter.txt");
+		**第一种读取方法：一个一个字节的读
+		int ch = 0;
+		ch = fr.read();
+		sop((char)ch);
+		fr.close();
+		**第二种读取方法：利用数组来提高效率
+		char[] buf = new char[1024];
+		int len = 0;
+		while((len = fr.read(buf))!=-1)
+		{
+			sop(new String(buf,0,len));
+		}
+		fr.close();
+	(4)需求4:拷贝文本文件
+		利用缓冲区提高数据读写效率
+		(无缓冲区就相当于一滴一滴的喝水，有缓冲区就相当于一杯一杯的喝水)
+		BufferedReader bufr = new BufferedReader(new FileReader("g:\\filewriter.txt"));
+		BufferedWriter bufw = new BufferedWriter(new FileWriter("d:\\copyfilewriter.txt"));
+		String line = null;
+		while((line = bufr.readLine())!=null)
+		{
+			burw.write(line);
+			bufw.newLine();
+			bufw.flush();
+		}
+		bufr.close();
+		bufw.close();
+****字节流：字节流写入时没有刷新
+	(1)需求1：在硬盘上创建一个文件并写入信息(字节流写入时没有刷新)
+		FileOutputStream fos = new FileOutputStream("g:\\filestream.txt");
+		fos.write(97);//写入一个字节,int：97代表写入char：a
+		fos.write("也可以写入字节数组".getBytes());//通常使用此种方式写入，直观！
+		fos.close();
+	(2)需求2：在硬盘已有文件上续写数据(字节流写入时没有刷新)
+		FileOutputStream fos = new FileOutputStream("g:\\filestream.txt",true);
+		fos.write("创建字节写入流时，传进去一个true参数就可以继续写入信息".getBytes());
+		fos.close();	
+	(3)需求3：读取硬盘上的文件
+		FileInputStream fis = new FileInputStream("g:\\filestream.txt");
+		**第一种读法：一个字节一个字节的读(此种读法慢)
+		int ch = 0;
+		while((ch = fis.read())!=-1)
+		{
+			sop((char)ch);
+		}
+		**第一种读法：利用字节数组读(此种读法效率有一定提高)
+		byte[] buf = new byte[1024];
+		int len = 0;
+		while((len = fis.read())!=-1)
+		{
+			sop(new String(buf,0,len));
+		}
+	(4)需求4:拷贝字节文件，如图片或者MP3或者电影
+		**第一种拷贝：不带缓冲区(慢，还是效率问题)
+		FileInputStream fis = new FileInputStream("g:\\1.mp3");
+		FileOutputStream fos = new FileOutputStream("g:\\copy1.mp3");
+		byte[] buf = new byte[1024];
+		int len = 0;
+		while((len = fis.read(buf))!=-1)
+		{
+			fos.(buf,0,len);//字节流写入无需刷新
+		}
+		fis.close();
+		fos.close();
+		**第二种拷贝：带缓冲区，高效
+		BufferedInputStream bufi = new BufferedInputStream(new FileInputStream("g:\\1.mp3"));
+		BufferedOutputStream bufo = new BufferedOutputStream(new FileOutputStream("g:\\copy1.mp3"));
+		int ch = 0;
+		while((ch = bufi.read())!=-1)
+		{
+			bufo.write(ch);
+		}
+		bufi.close();
+		bufo.close();
+****转换流：
+	(1)需求1：读取一个键盘录入
+		InputStream in = System.in;//创建一个键盘录入流，流不关则可以一直录入
+		int by1 = in.read();//一次读一个字节
+		int by2 = in.read();//一次读一个字节
+		sop(by1);//假设键盘录入的是abcd,则打印a
+		sop(by2);//假设键盘录入的是abcd,则打印b
+		in.close();	
+	(2)需求2：键盘录入一行数据打印一行数据，如果录入的是over则结束录入
+		InputStream in = System.in;
+		StringBuilder sb = new StringBuilder();
+		while(true)
+		{
+			int ch = in.read();
+			if(ch=='\r')
+				continue;
+			if(ch=='\n')
+			{
+				String line = sb.toString();
+				if("over".equals(line))
+					break;
+				sop(line.toUpperCase());//输出大写
+				sb.delete(0.sb.length());//清除上一行录入的数据
+
+			}
+			else
+				sb.append((char)ch);
+		}
+		in.close();
+	(3)需求3：发现需求2中其实就是读一行的原理，故引入字节通向字符的桥梁：InputStreamReader
+		为提高效率加入缓冲区：
+		BufferedReader bufr = new BufferedReader(new InputStreamReader(System.in));
+		String line = null;
+		while((line = bufr.readLine())!=null)
+		{
+			if("over".equals(line))
+				break;
+			sop(line.toUpperCase());//输出大写
+		}
+		bufr.close();
+	(4)需求4：键盘录入数据并打印到控制台
+		BufferedReader bufr = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bufw = new BufferedWriter(new OntputStreamWriter(System.out));
+		String line = null;
+		while((line = bufr.readLine())!=null)
+		{	
+			if("over".equals(line))
+				break;
+			bufw.write(line.toUpperCase());
+			bufw.newLine();
+			bufw.flush();	
+		}
+		bufr.close();
+		bufw.close();
+	(5)需求5:将键盘录入的数据存储到硬盘文件
+		则只需将(4)中的
+		BufferedWriter bufw = new BufferedWriter(new OntputStreamWriter(System.out));
+		改为：
+		BufferedWriter bufw = new BufferedWriter(new OntputStreamWriter(new FileWriter("g:\\demo.txt")));
+		即：
+		BufferedReader bufr = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bufw = new BufferedWriter(new OntputStreamWriter(new FileWriter("g:\\demo.txt")));
+		String line = null;
+		while((line = bufr.readLine())!=null)
+		{	
+			if("over".equals(line))
+				break;
+			bufw.write(line.toUpperCase());
+			bufw.newLine();
+			bufw.flush();	
+		}
+		bufr.close();
+		bufw.close();
+	(6)需求6：将硬盘文件的数据打印到控制台
+		则只需将(4)中的
+		BufferedReader bufr = new BufferedReader(new InputStreamReader(System.in));
+		改为：
+		BufferedReader bufr = new BufferedReader(new InputStreamReader(new FileReader("g:\\demo.txt")));
+		即：
+		BufferedReader bufr = new BufferedReader(new InputStreamReader(new FileReader("g:\\demo.txt")));
+		BufferedWriter bufw = new BufferedWriter(new OntputStreamWriter(System.out));
+		String line = null;
+		while((line = bufr.readLine())!=null)
+		{	
+			if("over".equals(line))
+				break;
+			bufw.write(line.toUpperCase());
+			bufw.newLine();
+			bufw.flush();	
+		}
+		bufr.close();
+		bufw.close();
+7、流操作的规律：
+	****流操作的难点：流对象很多，不知道具体用哪个
+	****规律：
+	(1)第一步：先明确源和目的
+		源：
+			文本：用Reader
+			字节：用InputStream
+		目的：
+			文本：用Writer
+			字节：用OutputStream
+	(2)第二步：明确是不是纯文本
+		是：用字符流；
+		不是：用字节流
+	(3)第三步：明确流体系后，通过设备来明确具体使用哪个流对象
+		源设备：
+			键盘：System.in
+			硬盘：文件流File
+			内存：数组流ArrayStream
+		目的设备：
+			键盘：System.out
+			硬盘：文件流File
+			内存：数组流ArrayStream
+8、File类
+	构造方法：
+	File(String pathname) 
+		通过将给定路径名字符串转换为抽象路径名来创建一个新 File 实例。 
+	File(String parent, String child) 
+		根据 parent 路径名字符串和 child 路径名字符串创建一个新 File 实例。
+	File(File parent, String child) 
+		根据 parent 抽象路径名和 child 路径名字符串创建一个新 File 实例。
+	方法摘要：
+	(1)创建：
+	 boolean createNewFile() 
+		当且仅当不存在具有此抽象路径名指定名称的文件时，不可分地创建一个新的空文件。 
+	 boolean mkdir() 
+		创建一级文件夹
+	 boolean mkdirs() 
+		创建多级文件夹
+	(判断)：
+	 boolean canExecute() 
+		测试应用程序是否可以执行此抽象路径名表示的文件。 
+	 boolean canRead() 
+		测试应用程序是否可以读取此抽象路径名表示的文件。 
+	 boolean canWrite() 
+		测试应用程序是否可以修改此抽象路径名表示的文件。
+	 int compareTo(File pathname) 
+		按字母顺序比较两个抽象路径名。 
+	 boolean isAbsolute() 
+		测试此抽象路径名是否为绝对路径名。 
+	 boolean isDirectory() 
+		测试此抽象路径名表示的文件是否是一个目录。 
+	 boolean isFile() 
+		测试此抽象路径名表示的文件是否是一个标准文件。 
+	 boolean isHidden() 
+		测试此抽象路径名指定的文件是否是一个隐藏文件。
+	 boolean exists() 
+		测试此抽象路径名表示的文件或目录是否存在。 
+	(3)获取：
+	 String getParent() 
+		返回此抽象路径名父目录的路径名字符串；如果此路径名没有指定父目录，则返回 null。 
+	 File getParentFile() 
+		返回此抽象路径名父目录的抽象路径名；如果此路径名没有指定父目录，则返回 null。 
+	 String getName() 
+		返回由此抽象路径名表示的文件或目录的名称。
+	 String getPath() 
+		将此抽象路径名转换为一个路径名字符串。 
+	 String getAbsolutePath() 
+		返回此抽象路径名的绝对路径名字符串。
+	 File getAbsoluteFile() 
+		返回此抽象路径名的绝对路径名形式。
+	(4)删除：
+	 boolean delete() 
+		删除此抽象路径名表示的文件或目录。 
+	 oid deleteOnExit() 
+		在虚拟机终止时，请求删除此抽象路径名表示的文件或目录。 
+	(5)获取全部：(非常重要！！！)
+	 String[] list() 
+		返回一个字符串数组，这些字符串指定此抽象路径名表示的目录中的文件和目录。 
+	 String[] list(FilenameFilter filter) 
+		返回一个字符串数组，这些字符串指定此抽象路径名表示的目录中满足指定过滤器的文件和目录。 
+	 File[] listFiles() 
+		返回一个抽象路径名数组，这些路径名表示此抽象路径名表示的目录中的文件。 
+	 File[] listFiles(FileFilter filter) 
+		返回抽象路径名数组，这些路径名表示此抽象路径名表示的目录中满足指定过滤器的文件和目录。
+	
+	****FilenameFilter接口只有一个方法：
+		boolean accept(File dir, String name) 
+			测试指定文件是否应该包含在某一文件列表中。 
+	****FileFilter接口只有一个方法：
+		boolean accept(File dir, String name) 
+			测试指定文件是否应该包含在某一文件列表中。
+8、File类常见需求：
+	(1)文件名过滤:列出给定目录的所有.java文件
+		public void showFileName(File file)
+		{
+			String[] filenames = file.list(new FilenameFilter()//匿名内部类
+			{
+				public boolean accept(File dir,String name)//复写唯一方法
+				{
+					return name.endsWith(".java");//列出所有.java文件
+				}
+			});
+		}
+	(2)列出指定目录下的所有文件和文件夹(递归)
+	**示例1：不带层次递归：
+	public static void showDir(File dir)
+	{
+		File[] files = dir.listFile();
+		for(int i = 0;i<files.length;i++)
+		{
+			if(files[i].isDirectory&&!files[i].isHidden())
+				showDir(files[i]);
+			else
+				sop(files[i]);
+		}
+	}
+	**示例2：带层次递归：
+	public static void showDir(File dir,int level)
+	{
+		sop(getLevel(level)+C);//进来先打印层次和目录
+		level++;
+		File[] files = dir.listFile();
+		for(int i = 0;i<files.length;i++)
+		{
+			if(files[i].isDirectory&&!files[i].isHidden())
+				showDir(files[i]);
+			else
+				sop(getLevel(level)+files[i]);//是文件就打印层次和目录
+		}
+	}
+	public static String getLevel(int level)
+	{
+		sop("|--");
+		StringBuilder sb = new StringBuilder();
+		for(int i=0;i<level;i++)
+		{
+			sb.inset(0."|  ")
+		}
+		return sb.toString();
+	}
+	(3)需求：删除带内容的目录：
+	public static void removeDir(File dir)
+	{
+		File[] files = file.listFile();
+		for(int i = 0;i<files.length;i++)
+		{
+			if(files[i].isDirectory&&!files[i].isHidden())
+				removeDir(files[i]);//如果是文件夹则继续调用函数
+			else//如果是文件则删除。注意删除的时候打印删除的结果，防止误删或者重删的情况
+				sop(files[i].toString()+"::"+files[i].delete());
+		}
+		sop(dir+"::"+dir.delete());
+	}
+	(4)需求：将制定目录下的java文件的绝对路径存储到文本文件中。
+	   思路：
+	   **对指定目录进行递归
+	   **获取递归过程中所有java文件的路径
+	   **将这些路径存储到集合中
+	   **将集合中的数据写入文件中
+	 //对指定目录进行递归并将所以Java文件存储到集合中
+	public static void getFileName(File file,ArrayList<File> arraylist){
+		File[] files = file.listFiles();
+		for (int i = 0; i < files.length; i++) {
+			if(files[i].isDirectory()&&!files[i].isHidden()){
+				getFileName(files[i],arraylist);
+			}else{
+				if(files[i].getName().endsWith(".java")){
+					arraylist.add(files[i]);
+				}
+			}
+		}
+	}
+	//将集合中所有数据存储到新文件中
+	public static void saveFileToNewDir(ArrayList<File> arraylist,File newDir){
+		BufferedWriter bufw = null;
+		try {
+			bufw = new BufferedWriter(new FileWriter(newDir));
+			for (File file : arraylist) {
+				String fileAbsolutePath = file.getAbsolutePath();
+				bufw.write(fileAbsolutePath);
+				bufw.newLine();
+				bufw.flush();	
+			}
+		} catch (Exception e) {
+			System.out.println("文件写入失败");
+		}finally{
+			try {
+				if(bufw!=null)
+					bufw.close();
+			} catch (Exception e2) {
+				System.out.println("文件写入流关闭失败");
+			}
+		}
+	}
+9、Properties
+(1)Properties是HashTable的子类，具备Map集合的特点，里面存储的是键值对
+(2)Properties是IO流合集合相结合的集合容器
+(3)Properties的特点是可以用于存储键值对形式的配置文件
+(4)构造方法：
+	Properties() 
+		创建一个无默认值的空属性列表。 
+	Properties(Properties defaults) 
+		创建一个带有指定默认值的空属性列表。 
+(5)方法摘要：
+	Object setProperty(String key, String value) 
+		调用 Hashtable 的方法 put。
+	String getProperty(String key) 
+		用指定的键在此属性列表中搜索属性。 
+	void load(InputStream inStream) 
+		从输入流中读取属性列表（键和元素对）。 
+	void load(Reader reader) 
+		按简单的面向行的格式从输入字符流中读取属性列表（键和元素对）。 
+	void list(PrintStream out) 
+		将属性列表输出到指定的输出流。 
+	void list(PrintWriter out) 
+		将属性列表输出到指定的输出流。
+	void store(OutputStream out, String comments) 
+		以适合使用 load(InputStream) 方法加载到 Properties 表中的格式，
+		将此 Properties 表中的属性列表（键和元素对）写入输出流。 
+	void store(Writer writer, String comments) 
+		以适合使用 load(Reader) 方法的格式，将此 Properties 表中的
+		属性列表（键和元素对）写入输出字符。 
+	Set<String> stringPropertyNames() 
+		返回此属性列表中的键集，其中该键及其对应值是字符串，如果在主属性列表中
+		未找到同名的键，则还包括默认属性列表中不同的键 
+(6)Properties代码示例：
+	public static void show()
+	{
+		Properties prop = new Properties();
+		prop.setProperty("张三","26");
+		prop.setProperty("李四","30");
+		prop.setProperty("王五","35");
+		sop(prop);
+		String value = prop.getProperty("张三");
+
+		Set<String> keys = prop.stringPropertyName();
+		for(String key : values)
+		{
+			sop(key+":"+prop.getPropety(key));
+		}
+	}
+(7)需求：记录应用程序的使用次数，如果使用次数已到，则提示用户注册。
+   思路：
+   **第一次使用时建立一个配置文件用于记录使用次数
+   **每次使用都加载该配置文件，并先判断已使用次数
+   **每次使用完使用次数加1，写入配置文件
+	public static void main(String[] args) throws IOException{
+		Properties prop = new Properties();//定义Properties，用来和IO流结合
+		File file = new File("library\\time.ini");//配置文件
+		if(!file.exists())
+			file.createNewFile();//如果文件不存在则创建文件(用于第一次使用时创建文件)
+		FileInputStream fis = new FileInputStream(file);//定义字节读取流，读取配置文件中记录的使用次数
+		prop.load(fis);//载入流，以获取文件中配置的键值对
+		int count = 0;//定义使用次数
+		String countValue = prop.getProperty("time");//通过键获取值
+		if(countValue!=null){//第一次时countValue为null
+			count = Integer.parseInt(countValue);//将字符串次数变成数字次数
+			if(count>3){
+				System.out.println("您使用次数已到，继续使用请注册！");
+				return;
+			}
+		}
+		count++;//如果使用次数未到则次数加1
+		prop.setProperty("time", count+"");//配置新的键值对
+		FileWriter fos = new FileWriter(file);
+		prop.store(fos, "这是应用程序使用次数的配置文件");//将新的键值对写入文件
+		fis.close();
+		fos.close();	
+	}
+10、IO中的其他流：
+	(1)打印流：
+		**PrintWriter:字符打印流
+			****构造方法：
+			PrintWriter(String fileName) 
+				创建具有指定文件名称且不带自动行刷新的新 PrintWriter。
+			PrintWriter(File file) 
+				使用指定文件创建不具有自动行刷新的新 PrintWriter。
+			PrintWriter(Writer out) 
+				创建不带自动行刷新的新 PrintWriter。 
+			PrintWriter(Writer out, boolean autoFlush) 
+				自动刷新
+			PrintWriter(OutputStream out) 
+				根据现有的 OutputStream 创建不带自动行刷新的新 PrintWriter。 
+			PrintWriter(OutputStream out, boolean autoFlush) 
+				自动刷新
+			****方法摘要：
+			PrintWriter append(char c) 
+				将指定字符添加到此 writer。 
+			void close() 
+				关闭该流并释放与之关联的所有系统资源。 
+			void flush() 
+				刷新该流的缓冲。 
+			void print(Object obj) 
+				打印对象。 
+			void print(String s) 
+				打印字符串。
+			void println() 
+				通过写入行分隔符字符串终止当前行。 
+		**PrintStream:字节打印流
+			****构造方法：
+			PrintStream(String fileName) 
+				创建具有指定文件名称且不带自动行刷新的新打印流。
+			PrintStream(File file) 
+				创建具有指定文件且不带自动行刷新的新打印流。
+			PrintStream(OutputStream out) 
+				创建新的打印流。 
+			PrintStream(OutputStream out, boolean autoFlush) 
+				创建新的打印流。 
+			****方法摘要：
+			PrintWriter append(char c) 
+				将指定字符添加到此 writer。 
+			void close() 
+				关闭该流并释放与之关联的所有系统资源。 
+			void flush() 
+				刷新该流的缓冲。 
+			void print(Object obj) 
+				打印对象。 
+			void print(String s) 
+				打印字符串。
+			void println() 
+				通过写入行分隔符字符串终止当前行。
+	(2)对象系列化：
+		**对象实体化：找一个介质，能长期的存储对象。
+		**对象的属性在Java程序中，都是存在于对内存中，随着对象的消失而消失，
+		  而ObjectOutputStream可以将对象实体化
+		**Serializable接口没有一个方法，也就是说其是一个标记接口。比如盖章的猪肉才是安全的。
+		**只有实现Serializable接口的子类才能被ObjectOutputStream系列化写入流，当某个
+		  类实现该接口后，会被Java自动分配UID号，以便编译器识别，区分不同对象。
+		**用ObjectOutputStream系列化的对象存储到文件后，该文件是乱码，也就是不可读的
+		  的用ObjectInputStream读取该类对象的属性。
+		**由于对象是有Java给对象分配相应的UID号，而UID号是根据对象的属性不同而分配的。
+		  当一个类对象被系列化到文件后，如果该类改动了对象的属性，比如将某个成员变量变成私有
+		  则该对象再用ObjectInputStream读取时会报异常，也就是说该系列化到文件的对象不能再被使用了
+		  那么，要想继续使用属性被改动后的对象，我们可以自定义给对象分配UID号，让UID号不随对象的属性
+		  变化而变化。
+		  自定义对象分配UID方法如下：
+			public static final long serialVersion UID = 43L;
+		**注意：
+			静态不能被系列化，因为静态成员变量实在内存的方法区，而ObjectOutputStream只能
+			对对内存里面的数据进行系列化
+			被transient修饰的非静态成员变量也不能被系列化
+			被系列化的对象存储到文件中，该文件是不可读的，所以该文件的扩展名一般
+			不写成.txt，通常后缀名写.object
+		**ObjectOutputStream
+		**ObjectInputStream
+	(3)管道流：
+		PipedInputStream
+		PipedOutputStream
+	(4)随机访问文件：RandomAccess(重要！！！)
+		**自身具备读写方法(很牛逼！又可以读又可以写)
+		**通过skipByte(int x)和seek(int x)来达到随机访问文件
+		**该类不是IO体系子类，而是直接继承Object，但它是IO包中的成员，因为它具备读写方法
+		**该类内部封装了数组，而且通过指针对数组的元素进行操作，可以通过getFilePoint获取指针位置
+		  同时可以通过seek改变指针位置
+		**该类完成读写的原理是内部封装了字节输入输出流
+		**通过该类的构造看出，该类只能操作文件，而且操作的文件只能有固定模式：
+			"r":只读
+			"rw":读写
+			"rws":
+			"red":
+		**构造方法：
+		RandomAccessFile(File file, String mode) 
+			创建从中读取和向其中写入（可选）的随机访问文件流，该文件由 File 参数指定。 
+		RandomAccessFile(String name, String mode) 
+			创建从中读取和向其中写入（可选）的随机访问文件流，该文件具有指定名称。 
+		**方法摘要：
+		void write(byte[] b) 
+			将 b.length 个字节从指定 byte 数组写入到此文件，并从当前文件指针开始。 
+		void write(byte[] b, int off, int len) 
+			将 len 个字节从指定 byte 数组写入到此文件，并从偏移量 off 处开始。 
+		void write(int b) 
+			向此文件写入指定的字节。 
+		int read() 
+			从此文件中读取一个数据字节。 
+		int read(byte[] b) 
+			将最多 b.length 个数据字节从此文件读入 byte 数组。 
+		int read(byte[] b, int off, int len) 
+			将最多 len 个数据字节从此文件读入 byte 数组。
+		String readLine() 
+			从此文件读取文本的下一行。 
+		long getFilePointer() 
+			返回此文件中的当前偏移量。 
+		long length() 
+			返回此文件的长度。 
+		void seek(long pos) 
+			设置到此文件开头测量到的文件指针偏移量，在该位置发生下一个读取或写入操作。
+	(4)操作基本数据类型的流对象：DateStream
+	(5)操作字节数组流：
+		ByteArrayInputStream
+		ByteArrayOutputStream
+11、IO流转换流的字符编码
+	(1)字符流的出现为了方便操作字符，更重要的是加入了编码转换
+	(2)通过子类转换流来完成
+		InputStreamReander
+		OutputStreamWriter
+	(3)在两个子类对象进行构造的时候可以加入编码表
+	(4)编码表：
+		将各个国家的文字用二进制数字表示并一一对应，形成一张表，这就是编码表
+	(5)常见的编码表：
+		**ASCII：美国标准信息交换码，用一个字节的七位表示
+		**ISO8859-1：拉丁码表，欧洲码表，用一个字节的八位表示
+		**GB2312：中文编码表，用两个字节表示
+		**GBK：中文编码表升级，融合录入更多的中文字符，用两个字节表示，为避免和老美重复
+		       两字节的最高位都是1，即汉字都是用负数表示
+		**Unicode：国际标准码，融合了多种文字，所有文字都用两个字节表示
+		**UTF-8：用一个字节到三个字节表示。
+		注：Unicode能识别中文，UTF-8也能识别中文，但两种编码表示一个汉字所用的字节数不同
+		Unicode用两个字节，UTF-8用三个字节，故涉及到编码转换。
+	(6)在流中涉及编码表的转换只有转换流：
+		InputStreamReander
+		OutputStreamWriter
+	(7)代码示例：
+		public static void write() throws IOException
+		{
+			OutputStreamWriter osw1 = new OutputStreamWriter(new FileOutputStream("gbk.txt"),"GBK");
+			osw1.write("你好");
+			osw1.close();
+
+			OutputStreamWriter osw2 = new OutputStreamWriter(new FileOutputStream("utf-8.txt"),"UTF-8");
+			osw2.write("你好");
+			osw2.close();
+		}
+		public static void read() throws IOException
+		{
+			InputStreamReader isr = new InputStreamReader(new FileInputStream("gbk.txt"),"GBK");
+			byte[] buf = new byte[1024];
+			int len = isr.read(buf);
+			sop(new String(buf,0,len));
+		}
+	(8)编码解码
+		编码：字符串变成字节数组：String-->getBytes()-->byte[]()
+		解码：字节数组变成字符串：byte[]-->new String(byte[],0,len)-->String
+	(9)代码示例：
+		public static void main(String[] args)
+		{
+			//编码解码1：默认编码
+			String str1 = "你好";
+			byte[] buf1 = str1.getBytes();//默认解码：Unicode，四个字节
+
+			//编码解码2：指定编码
+			String str2 = "你好";
+			byte[] buf2 = str2.getBytes("UTF-8");//指定解码：UTF-8,六个字节
+
+			
+			//编码解码3：编码正确解码错误
+			String str3 = "你好";
+			byte[] buf3 = str3.getBytes("GBK");//指定编码：GBK,四个字节
+			String str3 = new String(buf3,"ISO8859-1");//错误解码
+
+			//编码解码4：错误编码正确解码
+			String str4 = "你好";
+			byte[] buf4 = str4.getBytes("ISO8859-1");//错误编码
+			String str4 = new String(buf4,"GBK");//正确解码，读不出来
+
+			//编码解码5：编码对了，但是解码错误了，怎么办呢？
+			//此时可以将错误的解码再错编回去，载用正确编码解码
+			String str5 = "你好";
+			byte[] buf5 = str5.getBytes("GBK");//正确编码
+			String str6 = new String(buf5,"ISO8859-1");//错误解码，读不出来
+			byte[] buf6 = str6.getBytes("ISO8859-1");//再错误编码
+			String str7 = new String(buf6,"GBK");//再正确解码，这样就可以读出来了
+		}
+

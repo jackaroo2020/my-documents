@@ -1,0 +1,49 @@
+1. mySQl的分页是怎么实现的？
+     答：mysql数据库分页用limit关键字，它后面跟两个参数：startIndex和pageSize。
+
+2 JDBC访问数据库的基本步骤是什么(手写)？
+     答：（1）注册加载jdbc数据库驱动。Class.forName(DriverName)。
+         （2）得到连接对象 Connection。
+                要连接数据库，须要向java.sql.DriverManager请求并获得Connection对象，该对象就代表一个数据库的连接。
+                使用DriverManager的getConnection(Stringurl , String username ,  String password )方法。
+         （3）创建 Statement对象。
+                Statement stmt = con.createStatement(); //详细的实现方式：不能防止sql注入
+                PreparedStatement pstmt=con.prepareStatement(sql); //能防止sql注入
+         （4）书写sql语句并执行sql。
+                两种结果情况： 1）运行更新返回的是本次操作影响到的记录数。
+                              2）运行查询返回的结果是一个ResultSet对象。
+         （5）关闭资源释放资源。
+                操作完毕以后要把全部使用的JDBC对象全都关闭，以释放JDBC资源。关闭顺序和声明顺序相反。
+                    1）关闭记录集
+                    2）关闭声明
+                    3）关闭连接对象
+
+3. 说说preparedStatement和Statement的区别。
+     答：statement执行不带参数的简单SQL语句,并返回它所生成结果的对象,每次执行SQL语句时,数据库都要编译该sql语句。
+         PreparedStatement用来执行带参数的预编译的SQL语句。
+         PreparedStatement的优点:
+            1）效率高。使用PreparedStatement执行SQL命令时,命令会被数据库编译和解析,并放到命令缓冲区。
+            以后每当执行同一个PreparedStatement对象时,预编译的命令就可以重复使用。
+            2）代码可读性和可维护性好。
+            3）安全性好。使用PreparedStatement可以防止SQL注入。
+
+4.事务是什么？
+     答：事务是作为一个逻辑单元执行的一系列操作，一个逻辑工作单元必须有四个属性，
+        称为 ACID（原子性、一致性、隔离性和持久性）属性，只有这样才能成为一个事务：
+        原子性。事务必须是原子工作单元；对于其数据修改，要么全都执行，要么全都不执行。
+        一致性。事务在完成时，必须使所有的数据都保持一致状态。
+        隔离性。由并发事务所作的修改必须与任何其它并发事务所作的修改隔离。
+        持久性。事务完成之后，它对于系统的影响是永久性的。该修改即使出现系统故障也将一直保持。
+
+
+5. 数据库连接池的原理。为什么要使用连接池。
+     答：原理：为数据库连接建立一个“缓冲池”，预先在池中放入一定数量的数据库连接管道，
+               需要时，从池子中取出管道进行使用，操作完毕后，在将管道放入池子中。
+         优点：避免了频繁的向数据库申请资源，释放资源带来的性能损耗。
+         常用的数据库连接池有C3P0，DBCP，Druid，光连接池等。
+
+
+6. 存储过程和函数的区别。
+     答：存储过程是用户定义的一系列sql语句的集合，涉及特定表或其它对象的任务，用户可以调用存储过程，
+     而函数通常是数据库已定义的方法，它接收参数并返回某种类型的值并且不涉及特定用户表。
+

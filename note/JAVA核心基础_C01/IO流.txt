@@ -27,13 +27,9 @@
 							字符写入流缓冲区
 				|--->OutputStreamWriter：
 							字符通向字节的转换流(涉及键盘录入时用)
-				|--->OutputStreamWriter：	
-							打印流，可处理各种类型的数据
 		输入字符流：Reader: 字符读取流的抽象类
 				|--->FileReader：
 							字符读取流
-					|--->LineNumberReader：
-								跟踪行号的缓冲字符读取流
 				|--->BufferedReader：
 							字符读取流缓冲区
 				|--->InputStreamReader：
@@ -44,22 +40,15 @@
 			void flush()刷新此输出流并强制写出所有缓冲的输出字节。
 			abstract  void write(int b)  将指定的字节写入此输出流。
 			void write(byte[] b) 将 b.length 个字节从指定的 byte 数组写入此输出流。    
-			void write(byte[] b, int off, int len) 
-					将指定 byte 数组中从偏移量 off 开始的 len 个字节写入此输出流。 
+			void write(byte[] b, int off, int len) 将指定 byte 数组中从偏移量 off 开始的 len 个字节写入此输出流。
 		**字节读取流：InputStream：
 			void close() 关闭此输入流并释放与该流关联的所有系统资源。
-			int available() (特有方法！！)
-				返回此输入流下一个方法调用可以不受阻塞地从此输入流读取（或跳过）的估计字节数。 
+			int available() (特有方法！！) 返回此输入流下一个方法调用可以不受阻塞地从此输入流读取（或跳过）的估计字节数。
 			abstract  int read() 从输入流中读取数据的下一个字节。 
 			int read(byte[] b) 从输入流中读取一定数量的字节，并将其存储在缓冲区数组 b 中。
 			int read(byte[] b, int off, int len)  将输入流中最多 len 个数据字节读入 byte 数组。
 			long skip(long n) 跳过和丢弃此输入流中数据的 n 个字节。
-           
-	 
-           
-         
 
-			
 		**字符写入流：Writer：
 			abstract  void close() 关闭此流，但要先刷新它。
 			abstract  void flush() 刷新该流的缓冲。
@@ -74,236 +63,10 @@
 			int read() 读取单个字符。
 			int read(char[] cbuf)  将字符读入数组
 			abstract  int read(char[] cbuf, int off, int len) 将字符读入数组的某一部分。
-			long skip(long n)  跳过字符。 
-3、IO流常用字节流基类的子类：
-	**写入流：
-	(1)FileOutputStream：
-		**构造方法：
-		FileOutputStream(String name) 
-			创建一个向具有指定名称的文件中写入数据的输出文件流。
-		FileOutputStream(String name, boolean append) 
-			创建一个向具有指定 name 的文件中写入数据的输出文件流。
-		FileOutputStream(File file) 
-			创建一个向指定 File 对象表示的文件中写入数据的文件输出流。 
-		FileOutputStream(File file, boolean append) 
-			创建一个向指定 File 对象表示的文件中写入数据的文件输出流。
-		**方法摘要：
-		public void flush()
-		void close() 关闭此文件输出流并释放与此流有关的所有系统资源。
-		void write(int b) 将指定字节写入此文件输出流。
-		void write(byte[] b, int off, int len) 
-			将指定 byte 数组中从偏移量 off 开始的 len 个字节写入此文件输出流。 
-		void write(int b) 将指定字节写入此文件输出流。
-	(2)BufferedOutputStream：
-		**构造方法：
-		BufferedOutputStream(OutputStream out) 
-			创建一个新的缓冲输出流，以将数据写入指定的底层输出流。 
-		BufferedOutputStream(OutputStream out, int size) 
-			创建一个新的缓冲输出流，以将具有指定缓冲区大小的数据写入指定的底层输出流。 
-		**方法摘要：
-		void flush() 刷新此缓冲的输出流。          
-		void write(byte[] b, int off, int len) 
-			将指定 byte 数组中从偏移量 off 开始的 len 个字节写入此缓冲的输出流。 
-		void write(int b) 将指定的字节写入此缓冲的输出流。
-	(3)PrintStream：打印流，可将各种类型的数据原样打印，有自动刷新功能
-		**构造方法：
-		PrintStream(String fileName) 
-			创建具有指定文件名称且不带自动行刷新的新打印流。
-		PrintStream(File file) 
-			创建具有指定文件且不带自动行刷新的新打印流。
-		PrintStream(OutputStream out) 
-			创建新的打印流。
-		PrintStream(OutputStream out, boolean autoFlush) (当autoFlush为true时具有自动刷新功能)
-			创建新的打印流。
-		**方法摘要：
-		PrintStream append(char c) 
-			将指定字符添加到此输出流。
-		void close() 
-			关闭流。 
-		void flush() 
-			刷新该流的缓冲。
-		void print(各种类型的数据：) 
-			打印各种类型的数据 
-		void println(各种类型的数据：)：自动换行
-			打印各种类型的数据 
-		void write(byte[] buf, int off, int len) 
-			将 len 字节从指定的初始偏移量为 off 的 byte 数组写入此流。 
-		void write(int b) 
-			将指定的字节写入此流。 
+			long skip(long n)  跳过字符。
 
-	**读取流：
-	(1)FileInputStream：
-		**构造方法：
-		FileInputStream(String name) 
-			通过打开一个到实际文件的连接来创建一个 FileInputStream，
-			该文件通过文件系统中的路径名 name 指定。
-		FileInputStream(File file) 
-			通过打开一个到实际文件的连接来创建一个 FileInputStream，
-			该文件通过文件系统中的 File 对象 file 指定。
-		**方法摘要：
-		int available() (字节读取流特有方法！！！)
-			返回下一次对此输入流调用的方法可以不受阻塞地从此输入流读取（或跳过）的估计剩余字节数。
-		int read() 
-			从此输入流中读取一个数据字节。 
-		int read(byte[] b) 
-			从此输入流中将最多 b.length 个字节的数据读入一个 byte 数组中。 
-		int read(byte[] b, int off, int len) 
-			从此输入流中将最多 len 个字节的数据读入一个 byte 数组中。 
-		long skip(long n) 
-			从输入流中跳过并丢弃 n 个字节的数据。 
-	(2)BufferedInputStream:
-		**构造方法：
-		BufferedInputStream(InputStream in) 
-			创建一个 BufferedInputStream 并保存其参数，即输入流 in，以便将来使用。 
-		BufferedInputStream(InputStream in, int size) 
-			创建具有指定缓冲区大小的 BufferedInputStream 并保存其参数，即输入流 in，以便将来使用。 
-		**方法摘要：
-		int available() (字节读取流特有方法！！！)
-			返回可以从此输入流读取（或跳过）、且不受此输入流接下来的方法调用阻塞的估计字节数。 
-		int read() 
-			参见 InputStream 的 read 方法的常规协定。 
-		int read(byte[] b, int off, int len) 
-			从此字节输入流中给定偏移量处开始将各字节读取到指定的 byte 数组中。 
-		long skip(long n) 
-			参见 InputStream 的 skip 方法的常规协定。
-	
-4、字符流常用基类的子类
-	**写入流：
-	(1)FileWriter:
-		**构造方法：
-		FileWriter(String fileName) 
-			根据给定的文件名构造一个 FileWriter 对象。 
-		FileWriter(String fileName, boolean append) 
-			根据给定的文件名以及指示是否附加写入数据的 boolean 值来构造 FileWriter 对象。 
-		FileWriter(File file) 
-			根据给定的 File 对象构造一个 FileWriter 对象。 
-		FileWriter(File file, boolean append) 
-			根据给定的 File 对象构造一个 FileWriter 对象。 
-		FileWriter(FileDescriptor fd) 
-			构造与某个文件描述符相关联的 FileWriter 对象。
-		**方法摘要：跟Writer一样
-		abstract  void close() 关闭此流，但要先刷新它。
-		abstract  void flush() 刷新该流的缓冲。
-		void write(int c) 写入单个字符。
-		void write(char[] cbuf) 写入字符数组。          
-		abstract  void write(char[] cbuf, int off, int len) 写入字符数组的某一部分。 
-		void write(String str) 写入字符串。 
-		void write(String str, int off, int len) 写入字符串的某一部分。 
-	(2)BufferedWriter:
-		**构造方法：
-		BufferedWriter(Writer out) 
-			创建一个使用默认大小输出缓冲区的缓冲字符输出流。 
-		BufferedWriter(Writer out, int sz) 
-			创建一个使用给定大小输出缓冲区的新缓冲字符输出流。 
-		**方法摘要：
-		void close() 
-			关闭此流，但要先刷新它。 
-		void flush() 
-			 刷新该流的缓冲。 
-		void newLine() 
-			 写入一个行分隔符。 
-		void write(char[] cbuf, int off, int len) 
-			 写入字符数组的某一部分。 
-		void write(int c) 
-			 写入单个字符。 
-		void write(String s, int off, int len) 
-			 写入字符串的某一部分。 
-	(3)OutputStreamWriter：字节通向字符的转换流
-		**构造方法：
-		OutputStreamWriter(OutputStream out) 
-			创建使用默认字符编码的 OutputStreamWriter。
-		**方法摘要：
-		void write(char[] cbuf, int off, int len) 
-			写入字符数组的某一部分。 
-		void write(int c) 
-			写入单个字符。 
-		void write(String str, int off, int len) 
-			写入字符串的某一部分。
-	(4)PrintWriter:
-		**构造方法：
-		PrintWriter(String fileName) 
-			创建具有指定文件名称且不带自动行刷新的新 PrintWriter。
-		PrintWriter(File file) 
-			使用指定文件创建不具有自动行刷新的新 PrintWriter。
-		PrintWriter(Writer out) 
-			创建不带自动行刷新的新 PrintWriter。 
-		PrintWriter(Writer out, boolean autoFlush) 
-			创建新 PrintWriter。 
-		PrintWriter(OutputStream out) 
-			根据现有的 OutputStream 创建不带自动行刷新的新 PrintWriter。 
-		PrintWriter(OutputStream out, boolean autoFlush) 
-			通过现有的 OutputStream 创建新的 PrintWriter。
-		
-		**方法摘要：
-		PrintWriter append(char c) 
-			将指定字符添加到此 writer。 
-		void print(各种类型的数据：) 
-			打印各种类型的数据 
-		void println(各种类型的数据：)：自动换行
-			打印各种类型的数据
-		void write(char[] buf) 
-			写入字符数组。 
-		void write(char[] buf, int off, int len) 
-			写入字符数组的某一部分。 
-		void write(int c) 
-			写入单个字符。 
-		void write(String s) 
-			写入字符串。 
-		void write(String s, int off, int len) 
-			写入字符串的某一部分。 
-	**读取流：
-	(1)FileReader:
-		**构造方法：
-		FileReader(String fileName) 
-			在给定从中读取数据的文件名的情况下创建一个新 FileReader。
-		FileReader(File file) 
-			在给定从中读取数据的 File 的情况下创建一个新 FileReader。 
-		FileReader(FileDescriptor fd) 
-			在给定从中读取数据的 FileDescriptor 的情况下创建一个新 FileReader。 
-		**方法摘要：和Reader基类方法一致：
-		abstract  void close() 关闭该流并释放与之关联的所有资源。
-		int read() 读取单个字符。
-		int read(char[] cbuf)  将字符读入数组
-		abstract  int read(char[] cbuf, int off, int len) 将字符读入数组的某一部分。
-		long skip(long n)  跳过字符。 
-	(2)BufferedReader:
-		**构造方法：
-		BufferedReader(Reader in) 
-			创建一个使用默认大小输入缓冲区的缓冲字符输入流。
-		**方法摘要：
-		int read() 
-			读取单个字符。 
-		int read(char[] cbuf, int off, int len) 
-			将字符读入数组的某一部分。 
-		String readLine() 
-			读取一个文本行。 
-	(3)InputStreamReader：字符通向字节的桥梁：
-		**构造方法：
-		InputStreamReader(InputStream in) 
-			创建一个使用默认字符集的 InputStreamReader。
-		**方法摘要:
-		int read() 读取单个字符。
-		int read(char[] cbuf)  将字符读入数组
-		abstract  int read(char[] cbuf, int off, int len) 将字符读入数组的某一部分。
-		long skip(long n)  跳过字符。
-	(4)LineNumberReader：
-		**构造方法：
-		LineNumberReader(Reader in) 
-			使用默认输入缓冲区的大小创建新的行编号 reader。
-		**方法摘要：
-		int read() 
-			读取单个字符。 
-		int read(char[] cbuf, int off, int len) 
-			将字符读入数组中的某一部分。 
-		String readLine() 
-			读取文本行。
-		long skip(long n) 
-			跳过字符。 
-		int getLineNumber() 
-			获得当前行号。 
-		void setLineNumber(int lineNumber) 
-			设置当前行号。 
-6、IO流常见需求：
+
+3、IO流常见需求：
 ****字符流：
 	(1)需求1：在硬盘上创建一个文件并写入信息
 		用字符写入流：FileWriter
@@ -486,7 +249,7 @@
 		}
 		bufr.close();
 		bufw.close();
-7、流操作的规律：
+4、流操作的规律：
 	****流操作的难点：流对象很多，不知道具体用哪个
 	****规律：
 	(1)第一步：先明确源和目的
@@ -508,7 +271,7 @@
 			键盘：System.out
 			硬盘：文件流File
 			内存：数组流ArrayStream
-8、File类
+5、File类
 	构造方法：
 	File(String pathname) 
 		通过将给定路径名字符串转换为抽象路径名来创建一个新 File 实例。 
@@ -577,7 +340,7 @@
 	****FileFilter接口只有一个方法：
 		boolean accept(File dir, String name) 
 			测试指定文件是否应该包含在某一文件列表中。
-8、File类常见需求：
+6、File类常见需求：
 	(1)文件名过滤:列出给定目录的所有.java文件
 		public void showFileName(File file)
 		{
@@ -680,7 +443,7 @@
 			}
 		}
 	}
-9、Properties
+7、Properties
 (1)Properties是HashTable的子类，具备Map集合的特点，里面存储的是键值对
 (2)Properties是IO流合集合相结合的集合容器
 (3)Properties的特点是可以用于存储键值对形式的配置文件
@@ -755,7 +518,7 @@
 		fis.close();
 		fos.close();	
 	}
-10、IO中的其他流：
+8、IO中的其他流：
 	(1)打印流：
 		**PrintWriter:字符打印流
 			****构造方法：
@@ -876,7 +639,7 @@
 	(5)操作字节数组流：
 		ByteArrayInputStream
 		ByteArrayOutputStream
-11、IO流转换流的字符编码
+9、IO流转换流的字符编码
 	(1)字符流的出现为了方便操作字符，更重要的是加入了编码转换
 	(2)通过子类转换流来完成
 		InputStreamReander

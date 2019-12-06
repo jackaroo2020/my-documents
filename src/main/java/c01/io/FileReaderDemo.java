@@ -1,7 +1,6 @@
 package c01.io;
 
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * @Description: java类作用描述
@@ -12,7 +11,8 @@ import java.io.IOException;
 public class FileReaderDemo {
 
     /**
-     * 一个一个读取
+     * 读取硬盘上的文本文件，并将数据打印在控制台
+     * 第一种读取方法：一个一个字节的读
      *
      * @throws IOException
      */
@@ -25,6 +25,12 @@ public class FileReaderDemo {
         fileReader.close();
     }
 
+    /**
+     * 读取硬盘上的文本文件，并将数据打印在控制台
+     * 第二种读取方法：利用数组来提高效率
+     *
+     * @throws IOException
+     */
     public static void arrayRead() throws IOException {
         FileReader fileReader = new FileReader("g:\\fileWriter.txt");
         char[] buf = new char[1024];
@@ -35,8 +41,30 @@ public class FileReaderDemo {
         fileReader.close();
     }
 
+    /**
+     * 拷贝文本文件
+     * 		利用缓冲区提高数据读写效率
+     * 		(无缓冲区就相当于一滴一滴的喝水，有缓冲区就相当于一杯一杯的喝水)
+     *
+     * @param sourceFileDir  源目录
+     * @param dirFileDir 目标目录全路径
+     */
+    public static void copyFile(String sourceFileDir,String dirFileDir) throws IOException {
+        BufferedReader fileReader = new BufferedReader(new FileReader(sourceFileDir));
+        BufferedWriter fileWriter = new BufferedWriter(new FileWriter(dirFileDir));
+        String line = null;
+        while ((line = fileReader.readLine()) != null) {
+            fileWriter.write(line);
+            fileWriter.newLine();
+            fileWriter.flush();
+        }
+        fileReader.close();
+        fileWriter.close();
+    }
+
     public static void main(String[] args) throws IOException {
         //charRead();
-        arrayRead();
+        //arrayRead();
+        copyFile("g:\\fileWriter.txt","g:\\copyfileWriter.txt");
     }
 }

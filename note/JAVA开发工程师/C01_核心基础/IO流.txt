@@ -1,10 +1,8 @@
 ﻿五、IO流
 1、IO流概述
 	(1)用来处理设备(硬盘，控制台，内存)间的数据。
-	(2)java中对数据的操作都是通过流的方式。
-	(3)java用于操作流的类都在io包中。
-	(4)按照流操作的数据的类型不同：分为字节流和字符流。字符流是为了方便中文的操作而来的。	
-	(5)按照流的流向不同分为：输入流，输出流
+	(2)按照流操作的数据的类型不同：分为字节流和字符流。字符流是为了方便中文的操作而来的，因为字节流在处理时是逐个字节读取，在读取汉字时会出现乱码问题。
+	(3)按照流的流向不同分为：输入流，输出流
 2、IO流常用基类：
 	(1)字节流
 		输出字节流：OutputStream：字节写入流抽象类
@@ -365,30 +363,6 @@
 				sop(files[i]);
 		}
 	}
-	**示例2：带层次递归：
-	public static void showDir(File dir,int level)
-	{
-		sop(getLevel(level)+C);//进来先打印层次和目录
-		level++;
-		File[] files = dir.listFile();
-		for(int i = 0;i<files.length;i++)
-		{
-			if(files[i].isDirectory&&!files[i].isHidden())
-				showDir(files[i]);
-			else
-				sop(getLevel(level)+files[i]);//是文件就打印层次和目录
-		}
-	}
-	public static String getLevel(int level)
-	{
-		sop("|--");
-		StringBuilder sb = new StringBuilder();
-		for(int i=0;i<level;i++)
-		{
-			sb.inset(0."|  ")
-		}
-		return sb.toString();
-	}
 	(3)需求：删除带内容的目录：
 	public static void removeDir(File dir)
 	{
@@ -485,9 +459,9 @@
 		String value = prop.getProperty("张三");
 
 		Set<String> keys = prop.stringPropertyName();
-		for(String key : values)
+		for(String key : keys)
 		{
-			sop(key+":"+prop.getPropety(key));
+			sop(key+":"+prop.getProperty(key));
 		}
 	}
 (7)需求：记录应用程序的使用次数，如果使用次数已到，则提示用户注册。
@@ -608,7 +582,7 @@
 			"r":只读
 			"rw":读写
 			"rws":
-			"red":
+			"rwd":
 		**构造方法：
 		RandomAccessFile(File file, String mode) 
 			创建从中读取和向其中写入（可选）的随机访问文件流，该文件由 File 参数指定。 
@@ -635,7 +609,7 @@
 			返回此文件的长度。 
 		void seek(long pos) 
 			设置到此文件开头测量到的文件指针偏移量，在该位置发生下一个读取或写入操作。
-	(4)操作基本数据类型的流对象：DateStream
+	(4)操作基本数据类型的流对象：DataStream
 	(5)操作字节数组流：
 		ByteArrayInputStream
 		ByteArrayOutputStream
@@ -674,7 +648,7 @@
 		public static void read() throws IOException
 		{
 			InputStreamReader isr = new InputStreamReader(new FileInputStream("gbk.txt"),"GBK");
-			byte[] buf = new byte[1024];
+			char[] buf = new char[1024];
 			int len = isr.read(buf);
 			sop(new String(buf,0,len));
 		}
@@ -682,33 +656,37 @@
 		编码：字符串变成字节数组：String-->getBytes()-->byte[]()
 		解码：字节数组变成字符串：byte[]-->new String(byte[],0,len)-->String
 	(9)代码示例：
-		public static void main(String[] args)
-		{
-			//编码解码1：默认编码
-			String str1 = "你好";
-			byte[] buf1 = str1.getBytes();//默认解码：Unicode，四个字节
+    public static void encodeTest() throws UnsupportedEncodingException {
+        //编码解码1：默认编码
+        String str1 = "你好";
+        byte[] buf1 = str1.getBytes();//默认解码：Unicode，四个字节
 
-			//编码解码2：指定编码
-			String str2 = "你好";
-			byte[] buf2 = str2.getBytes("UTF-8");//指定解码：UTF-8,六个字节
+        //编码解码2：指定编码
+        String str2 = "你好";
+        byte[] buf2 = str2.getBytes("UTF-8");//指定解码：UTF-8,六个字节
 
-			
-			//编码解码3：编码正确解码错误
-			String str3 = "你好";
-			byte[] buf3 = str3.getBytes("GBK");//指定编码：GBK,四个字节
-			String str3 = new String(buf3,"ISO8859-1");//错误解码
 
-			//编码解码4：错误编码正确解码
-			String str4 = "你好";
-			byte[] buf4 = str4.getBytes("ISO8859-1");//错误编码
-			String str4 = new String(buf4,"GBK");//正确解码，读不出来
+        //编码解码3：编码正确解码错误
+        String str3 = "你好";
+        byte[] buf3 = str3.getBytes("GBK");//指定编码：GBK,四个字节
+        String str13 = new String(buf3,"ISO8859-1");//错误解码
 
-			//编码解码5：编码对了，但是解码错误了，怎么办呢？
-			//此时可以将错误的解码再错编回去，载用正确编码解码
-			String str5 = "你好";
-			byte[] buf5 = str5.getBytes("GBK");//正确编码
-			String str6 = new String(buf5,"ISO8859-1");//错误解码，读不出来
-			byte[] buf6 = str6.getBytes("ISO8859-1");//再错误编码
-			String str7 = new String(buf6,"GBK");//再正确解码，这样就可以读出来了
-		}
+        //编码解码4：错误编码正确解码
+        String str4 = "你好";
+        byte[] buf4 = str4.getBytes("ISO8859-1");//错误编码
+        String str14 = new String(buf4,"GBK");//正确解码，读不出来
 
+        //编码解码5：编码对了，但是解码错误了，怎么办呢？
+        //此时可以将错误的解码再错编回去，载用正确编码解码
+        String str5 = "你好";
+        byte[] buf5 = str5.getBytes("GBK");//正确编码
+        String str6 = new String(buf5,"ISO8859-1");//错误解码，读不出来
+        byte[] buf6 = str6.getBytes("ISO8859-1");//再错误编码
+        String str7 = new String(buf6,"GBK");//再正确解码，这样就可以读出来了
+    }
+
+10、面试题
+    （1）怎么样把我们控制台的输出改成输出到一个文件里面,这个技术叫什么
+        答：SetOut（printWriter,printStream） 重定向。
+    （2）解释一下java.io.Serializable接口。
+        答：类通过实现 java.io.Serializable 接口以启用其序列化功能。未实现此接口的类将无法使其任何状态序列化或反序列化。

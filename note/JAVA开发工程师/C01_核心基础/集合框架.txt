@@ -32,16 +32,7 @@
 		A:请问String s = new String("hello");创建了几个对象。
 		  两个。一个"hello"字符串对象，在方法区的常量池；一个s对象，在栈内存。
 
-		B:请写出下面的结果
-			String s1 = new String("abc");
-			Strign s2 = new String("abc");
-			String s3 = "abc";
-			String s4 = "abc";
-
-			sop(s1==s2);  //false
-			sop(s1==s3);  //false
-			sop(s3==s4);  //true
-		C:字符串对象一旦被创建就不能被改变。
+		B:字符串对象一旦被创建就不能被改变。
 			指的是字符串常量值不改变。
 	(4)字符串中各种功能的方法
 		A:判断
@@ -57,11 +48,9 @@
 		*****	int length():返回此字符串的长度
 		*****	char charAt(int index):返回指定索引处的 char值
 		*****	int indexOf(int ch):返回指定字符在此字符串中第一次出现处的索引。 
-			int indexOf(int ch, int fromIndex):返回在此字符串中第一次出现指定字符处的索引，
-							   从指定的索引开始搜索。 
+			int indexOf(int ch, int fromIndex):返回在此字符串中第一次出现指定字符处的索引，从指定的索引开始搜索。
 			int indexOf(String str):返回指定子字符串在此字符串中第一次出现处的索引。 
-			int indexOf(String str, int fromIndex):返回指定子字符串在此字符串中第一次
-								出现处的索引，从指定的索引开始。 
+			int indexOf(String str, int fromIndex):返回指定子字符串在此字符串中第一次出现处的索引，从指定的索引开始。
 		***	int lastIndexOf(int ch)：返回指定字符在此字符串中最后一次出现处的索引。 
 			int lastIndexOf(int ch, int fromIndex) 
 				返回指定字符在此字符串中最后一次出现处的索引,从指定的索引处开始进行反向搜索。 
@@ -78,10 +67,7 @@
 			void getChars(int srcBegin, int srcEnd, char[] dst, int dstBegin) 
 				将字符从此字符串复制到目标字符数组。 
 		*****	char[] toCharArray()：(很常用！)从字符串到字符数组的方法
-		****	static String copyValueOf(char[] data) 
-				返回指定数组中表示该字符序列的 String。 
-			static String copyValueOf(char[] data, int offset, int count) 
-				返回指定数组中表示该字符序列的 String。 
+		****	static String copyValueOf(char[] data) 返回指定数组中表示该字符序列的 String。
 		*****	static String valueOf(数据类型):把该数据类型的数据转换成字符串。
 		***	String toLowerCase()：把字符串转换成小写
 			String toUpperCase()：把字符串转换成大写
@@ -95,10 +81,8 @@
 		F:	
 			String trim():去除字符串的前后空格
 		G:	
-			int compareTo(String anotherString) 
-				按字典顺序比较两个字符串。 
-			int compareToIgnoreCase(String str) 
-				按字典顺序比较两个字符串，不考虑大小写。 
+			int compareTo(String anotherString):按字典顺序比较两个字符串。
+			int compareToIgnoreCase(String str) :按字典顺序比较两个字符串，不考虑大小写。
 
 2：StringBuffer
 	(1)字符串的缓冲区，是一个容器。
@@ -172,27 +156,13 @@
 			static Class<Integer> TYPE 表示基本类型int的Class 实例
           
 		Integer(int value) 构造一个新分配的Integer对象，它表示指定的int值。
-		Inreger(String s) 注意：s必须是纯数字的字符串。否则会有异常NumberFormatException
+		Integer(String s) 注意：s必须是纯数字的字符串。否则会有异常NumberFormatException
 		                        
 	(5)几个常用的方法
-		Integer.toBinaryString();
-			以二进制（基数 2）无符号整数形式返回一个整数参数的字符串表示形式。
-		Integer.toOctalString();
-			以八进制（基数 8）无符号整数形式返回一个整数参数的字符串表示形式。
-		Integer.toHexString();
-			以十六进制（基数 16）无符号整数形式返回一个整数参数的字符串表示形式。
-		static int Integer.parseInt(String s) 将字符串参数作为有符号的十进制整数进行解析,
-			字符串必须是int型范围内的数字字符串
-		static int Integer.parseInt(String s,int basic) 
-			使用第二个参数指定的基数,将字符串参数解析为有符号的整数.
-			字符串必须是int型范围内的数字字符串
-		short shortValue() 以short类型返回该Integer的值。          
+		Integer.toBinaryString():以二进制（基数 2）无符号整数形式返回一个整数参数的字符串表示形式。
+		short shortValue() 以short类型返回该Integer的值。
 		int intValue() 以int类型返回该Integer的值。  
 		static Integer valueOf(int num) 返回一个表示指定的 int 值的 Integer 实例。
-		static Integer valueOf(String s) 返回保存指定的String的值的Integer对象。           
-                static Integer valueOf(String s, int radix) 
-			返回一个Integer对象，该对象中保存了用第二个参数提供的基数进行
-			解析时从指定的String中提取的值。 
 
 	(6)类型转换
 		int -- Integer
@@ -212,7 +182,8 @@
 			String s = "20";
 			A:int num = Integer.parseInt(s);
 			B:Integer i = new Integer(s);或者Integer i = Integer.valueOf(s);
-			  int num = i.intValue();	
+			  int num = i.intValue();
+
 6、集合框架：
 	(1)为什么出现集合类？
 		面向对象对事物的体现都是以对象的形式，为了方便对多个对象的操作，就对对象进行存储。
@@ -260,21 +231,19 @@
 			     都是通过复写equals方法来判断！
 
 			|--->LinkedList
-			(1)LinkLedist的特有方法：
+			(1)LinkedList的特有方法：
 				 boolean offerFirst(E e)  在此列表的开头插入指定的元素。
 				 boolean offerLast(E e) 在此列表末尾插入指定的元素。
 				 E peekFirst() 获取但不移除此列表的第一个元素；如果此列表为空，则返回 null。
 				 E peekLast() 获取但不移除此列表的最后一个元素；如果此列表为空，则返回 null。
 				 E pollFirst() 获取并移除此列表的第一个元素；如果此列表为空，则返回 null。
 				 E pollLast() 获取并移除此列表的最后一个元素；如果此列表为空，则返回 null。
-			(2)通过LinkLedist的特有方法，可以实现某些数据特殊方式的存取，比如堆栈和队列。
+			(2)通过LinkedList的特有方法，可以实现某些数据特殊方式的存取，比如堆栈和队列。
 
 				一般情况下，使用哪种List接口下的实现类呢？
 				如果要求增删快，考虑使用LinkedList
 				如果要求查询快，考虑使用ArrayList
 				如果要求线程安全，考虑使用Vector。
-
-
 
 		     |--->Set:集合，元素是无序的(因为没有索引)，元素不可以重复。可以有null元素。
 			    |--->HashSet(JDK1.2):底层数据结构是哈希表、存取速度快、元素唯一、线程不同步。
@@ -286,7 +255,7 @@
 					 保证元素唯一性的依据：compareTo方法return 0
 					 TreeSet排序的第一种方式:让元素自身具备比较性，比如八种基本数据类型或则字符串，
 								 实现Compareble接口,覆盖compareTo方法，
-								 此方式是元素的自然顺序			 
+								 此方式是元素的自然顺序
 					 TreeSet排序的第一种方式:当元素自身不具备比较性(比如存储学生对象时)或者具备的
 								 比较性不是我们所需要的比较性时(比如想字符串的长度排序),
 								 此时就需要让集合自身具备自定义的比较性。 
@@ -302,14 +271,15 @@
 			      在定义对象的类中通常复写hashCode和equals方法。
 			      public int hashCode()
 			      {
-				return name.hashCode()+age*39;
+				    return name.hashCode()+age*39;
 			      }
 			      public boolean equals(Object obj)
 			      {
-				if(!(obj instanceof Student))
-					return false;
-				Student stu = (Student)obj;
-				return this.name.equals(stu.name)&&this.age==stu.age;
+				   if(!(obj instanceof Student)) {
+					    return false;
+					}
+				    Student stu = (Student)obj;
+				    return this.name.equals(stu.name)&&this.age==stu.age;
 			      }
 
 			     HashSet是如何保证元素唯一性的呢？
@@ -317,12 +287,12 @@
 			      **如果两元素的hashCode值相同，则继续判断equals是否返回true；
 			      **hashCode和equals方法虽然定义在自定义对象类里面，但不是我们手动调用
 			        而是往HashSet集合里面存储元素的时候，集合底层自己调用hashCode和equals
-				它自己拿对象去判断，自己判断两元素是否是同一个元素。
+				    它自己拿对象去判断，自己判断两元素是否是同一个元素。
 
 			(2)TreeSet:
 			     TreeSet要求往里面存的元素具备比较性，否则会报错。
 			     TreeSet排序的第一种方式:让元素自身具备比较性
-				  定义对象类，实现Compareble接口,复写compareTo方法，此方式是元素的自然顺序
+				  定义对象类，实现Comparable接口,复写compareTo方法，此方式是元素的自然顺序
 				  class Student implements Comparable
 				  {
 					private String name;
@@ -383,8 +353,6 @@
 					}
 				 }
 
-				 
-								 	
 			     基本数据类型或字符串对象均实现了Comparable接口，故同种类型基本数据间具备比较性，即自然顺序。
 	
 			      
@@ -401,8 +369,7 @@
 		线程不同步，效率高；
 		保证元素唯一性的:
 			 原理：先判断元素的hashCode值是否相同，再判断两元素的equals方法是否为true
-			 (往HashSet里面存的自定义元素要复写hashCode和equals方法，
-			 以保证元素的唯一性！)
+			 (往HashSet里面存的自定义元素要复写hashCode和equals方法， 以保证元素的唯一性！)
 		class Student {
 			private String name;
 			private int age;
@@ -460,7 +427,7 @@
 		线程不同步；
 		可以给Map集合中的键进行排序.
 		TreeMap排序的第一种方式:让元素自身具备比较性，比如八种基本数据类型或则字符串，
-				 实现Compareble接口,覆盖compareTo方法，
+				 实现Comparable接口,覆盖compareTo方法，
 				 此方式是元素的自然顺序			 
 		TreeMap排序的第一种方式:当元素自身不具备比较性(比如存储学生对象时)或者具备的
 				 比较性不是我们所需要的比较性时(比如想字符串的长度排序),
@@ -525,7 +492,7 @@
 	**LisIterator：系列表迭代器，允许程序员按任一方向遍历列表、迭代期间修改列表		
 	**Comparable：此接口强行对实现它的每个类的对象进行整体自然排序。使元素具备比较性
 	**Comparator：强行对某个对象collection进行整体排序的比较函数，使集合具备比较性
-	**Collections：此类完全由在 collection 上进行操作或返回 collection 的静态方法组成。
+	**Collections：此类完全由在 c01.collection 上进行操作或返回 c01.collection 的静态方法组成。
 	**Arrays：此类包含用来操作数组(比如排序和搜索)的各种静态方法
 
 7、集合类各容器方法：
@@ -565,15 +532,15 @@
 (1)、ArrayList：
     |--->构造方法摘要：(少用，不是重点)
 	ArrayList()：构造一个初始容量为 10 的空列表。
-	ArrayList(Collection<? extends E> c)： 构造一个包含指定 collection 的元素的列表，						   
+	ArrayList(Collection<? extends E> c)： 构造一个包含指定 c01.collection 的元素的列表，
 	ArrayList(int initialCapacity)： 构造一个具有指定初始容量的空列表。
     |--->方法摘要：
 	|--->添加：
 	boolean add(E e)： 将指定的元素添加到此列表的尾部。
 	void add(int index, E element)： 将指定的元素插入此列表中的指定位置。
-	boolean addAll(Collection<? extends E> c):按照指定 collection 的迭代器所返回的元素顺序，
-						 将该 collection 中的所有元素添加到此列表的尾部 
-	boolean addAll(int index, Collection<? extends E> c)： 从指定的位置开始，将指定 collection
+	boolean addAll(Collection<? extends E> c):按照指定 c01.collection 的迭代器所返回的元素顺序，
+						 将该 c01.collection 中的所有元素添加到此列表的尾部
+	boolean addAll(int index, Collection<? extends E> c)： 从指定的位置开始，将指定 c01.collection
 							       中的所有元素插入到此列表中。 
 	|--->删除：
 	void clear(): 移除此列表中的所有元素。
@@ -581,7 +548,7 @@
 	boolean remove(Object o): 移除此列表中首次出现的指定元素（如果存在）。
 	protected  void removeRange(int fromIndex, int toIndex): 
 			移除列表中索引在 fromIndex（包括）和 toIndex（不包括）之间的所有元素。
-	boolean removeAll(Collection<?> c): 从列表中移除指定 collection 中包含的其所有元素 
+	boolean removeAll(Collection<?> c): 从列表中移除指定 c01.collection 中包含的其所有元素
 	|--->获取：
 	E get(int index): 返回此列表中指定位置上的元素。
 	int indexOf(Object o): 返回此列表中首次出现的指定元素的索引，或如果此列表不包含元素，则返回 -1。
@@ -594,8 +561,8 @@
 (2)LinkedList:
 	|--->构造方法摘要：
 		LinkedList(): 构造一个空列表。 
-		LinkedList(Collection<? extends E> c): 构造一个包含指定 collection 中的元素的列表，
-						       这些元素按其 collection 的迭代器返回的顺序排列。
+		LinkedList(Collection<? extends E> c): 构造一个包含指定 c01.collection 中的元素的列表，
+						       这些元素按其 c01.collection 的迭代器返回的顺序排列。
 	|--->方法摘要:(特有的)
 		|--->添加
 			void addFirst(E e): 将指定元素插入此列表的开头。 
@@ -615,15 +582,15 @@
 (3)Vector
 	|--->构造方法摘要：
 		Vector(): 构造一个空向量，使其内部数据数组的大小为 10，其标准容量增量为零。          
-		Vector(Collection<? extends E> c):  构造一个包含指定 collection 中的元素的向量，
-						    这些元素按其 collection 的迭代器返回元素的顺序排列。
+		Vector(Collection<? extends E> c):  构造一个包含指定 c01.collection 中的元素的向量，
+						    这些元素按其 c01.collection 的迭代器返回元素的顺序排列。
 	|--->方法摘要：
 		|--->添加：
 			boolean add(E e): 将指定元素添加到此向量的末尾。
 			void add(int index, E element): 在此向量的指定位置插入指定的元素。         
 			boolean addAll(Collection<? extends E> c):
 					 将指定 Collection 中的所有元素添加到此向量的末尾， 
-					 按照指定 collection 的迭代器所返回的顺序添加这些元素。 
+					 按照指定 c01.collection 的迭代器所返回的顺序添加这些元素。
 			boolean addAll(int index, Collection<? extends E> c): 在指定位置将指定 Collection 中的所有元素插入到此向量中。
 		|--->获取:
 			Enumeration<E> elements(): 返回此向量的组件的枚举。
@@ -638,7 +605,7 @@
 (1)HashSet:它不保证set的迭代顺序;特别是它不保证该顺序恒久不变.此类允许使用null元素。 
 	|--->构造方法：
 		HashSet() 构造一个新的空 set，其底层 HashMap 实例的默认初始容量是 16，加载因子是 0.75。
-		HashSet(Collection<? extends E> c) 构造一个包含指定 collection 中的元素的新 set。
+		HashSet(Collection<? extends E> c) 构造一个包含指定 c01.collection 中的元素的新 set。
 	|--->方法摘要：
 		boolean add(E e) 如果此 set 中尚未包含指定元素，则添加指定元素。   
 		void clear() 从此 set 中移除所有元素。	  
@@ -652,12 +619,12 @@
 	|--->构造方法：
 		TreeSet() 构造一个新的空 set，该set根据其元素的自然顺序进行排序。          
 		TreeSet(Collection<? extends E> c) 
-			 构造一个包含指定 collection 元素的新 TreeSet，它按照其元素的自然顺序进行排序。 
+			 构造一个包含指定 c01.collection 元素的新 TreeSet，它按照其元素的自然顺序进行排序。
 		TreeSet(Comparator<? super E> comparator)  构造一个新的空 TreeSet，它根据指定比较器进行排序。
 	|--->方法摘要：
 		添加：
 		 boolean add(E e)  将指定的元素添加到此 set（如果该元素尚未存在于 set 中）。
-		 boolean addAll(Collection<? extends E> c) 将指定 collection 中的所有元素添加到此 set 中。
+		 boolean addAll(Collection<? extends E> c) 将指定 c01.collection 中的所有元素添加到此 set 中。
 		 删除：
 		  void clear() 移除此 set 中的所有元素。 
 		  boolean remove(Object o)  将指定的元素从 set 中移除（如果该元素存在于此 set 中）。 
@@ -722,8 +689,7 @@
 		而每个容器的数据结构不同，所以取出动作的细节也不一样，但是有共性内容：判断和取出。
 		那么就将共性内容进行抽取，从而形成了接口Iterater
 	(3)获取迭代器的方法：
-		Iterator<E> iterator() 返回在此 collection 的元素上进行迭代的迭代器。 
-		Iterator<E> iterator() 返回在此 set 中的元素上进行迭代的迭代器。      
+		Iterator<E> iterator() 返回在此 c01.collection 的元素上进行迭代的迭代器。
 	(3)迭代器方法：
 		boolean hasNext() 如果仍有元素可以迭代,则返回 true。
 		E next() 返回迭代的下一个元素。       
@@ -744,10 +710,12 @@
 		int nextIndex() 返回对 next 的后续调用所返回元素的索引。         
 		E previous() 返回列表中的前一个元素。 	  
 		int previousIndex() 返回对 previous 的后续调用所返回元素的索引。 	  
-		void set(E e) 用指定元素替换 next 或 previous 返回的最后一个元素（可选操作）。 
+		void set(E e) 用指定元素替换 next 或 previous 返回的最后一个元素（可选操作）。
+
 10、堆栈和队列
 	堆栈：先进后出，比如杯子里的水
 	队列：先进先出，比如水管的水
+
 11、集合类各种容器的使用注意细节：
 	(1)迭代器：
 		**迭代器的next方法是自动向下取元素，要避免出现NoSuchElementException。
@@ -781,7 +749,7 @@
 		**TreeSet集合要求往集合里存放的元素自身具备比较性，否则会报错
 		**TreeSet集合保证元素唯一性的依据是：通过compareTo或者compare方法中的来保证元素的唯一性。
 			TreeSet排序的第一种方式:让元素自身具备比较性，
-						定义元素类实现Compareble接口，覆盖compare方法，
+						定义元素类实现Comparable接口，覆盖compare方法，
 						此方式是元素的自然顺序。
 			TreeSet排序的第二种方式:让集合具备比较性
 						当元素自身不具备比较性或者具备的比较性不是
@@ -805,6 +773,7 @@
 		|--TreeMap
 			底层是二叉树
 			线程不安全的
+
 12、如果你想将一组对象按一定顺序存取，在不考虑并发访问的情况下会使用____C_____ , 
 	反之则会使用____A_____；如果你想存储一组无序但唯一的对象，你会使用___B______ ; 
 	如果你想按关键字对对象进行存取，在不考虑并发访问的情况下会使用___D______ ,反之则会使用_____E____。
@@ -813,6 +782,7 @@ B. HashSet
 C. ArrayList
 D. HashMap
 E. Hashtable
+
 13、泛型：
 	(1)为什么会出现泛型？
 		因为集合存放的数据类型不固定，故往集合里面存放元素时，存在安全隐患，
@@ -845,6 +815,7 @@ E. Hashtable
 		**两种泛型限定
 			向上限定： ? extends E  ;E可以接收E类型或者E的子类
 			向下限定： ? super E  ;E可以接收E类型或者E的父类
+
 14、高级for循环
 	(1)JDK1.5新特性，代替迭代器使用时的不爽，简化书写，底层原理是迭代器凡是支持迭代器的都支持高级for循环
 	   高级for循环，只用于集合和数组的遍历，集合只能用Collection不能用Map集合
@@ -861,7 +832,8 @@ E. Hashtable
 		列表迭代器还可以在遍历过程中进行增删改查的操作
 	(4)传统for循环和高级for循环的区别
 		高级for循环有一个局限性，就是必须要有遍历的目标(集合或者数组)
-		遍历数组时建议使用传统for循环，因为可以定义角标，比如打印100次helloworld时用传统for循环方便
+		遍历数组时建议使用传统for循环，因为可以定义角标，比如打印100次hello时用传统for循环方便
+
 15、可变参数
 	(1)数组的可变参数
 		格式：
@@ -873,15 +845,17 @@ E. Hashtable
 
 			}
 		注意：可变参数一定要放在参数列表的最后面
+
 16、静态导入：
 	**import static java.util.Arrays.*  导入的是Arrays这个类中所有的静态方法
 	**当类名重名时，需要制定具体的报名
 	**当方法重名时，需要制定具体所属的对象或者类
+
 17、Collections类：
-	(1)此类完全由在 collection 上进行操作或返回 collection 的静态方法组成。
+	(1)此类完全由在 c01.collection 上进行操作或返回 c01.collection 的静态方法组成。
 	(2)静态方法摘要：
 		static <T> boolean addAll(Collection<? super T> c, T... elements) 
-			将所有指定元素添加到指定 collection 中。
+			将所有指定元素添加到指定 c01.collection 中。
 		static <T> void fill(List<? super T> list, T obj) 
 			使用指定元素替换指定列表中的所有元素。
 		static <T> boolean replaceAll(List<T> list, T oldVal, T newVal) 
@@ -889,7 +863,7 @@ E. Hashtable
 		static void reverse(List<?> list) 
 			反转指定列表中元素的顺序。 
 		static <T> Comparator<T>  reverseOrder() 
-			返回一个比较器，它强行逆转实现了 Comparable 接口的对象 collection 的自然顺序
+			返回一个比较器，它强行逆转实现了 Comparable 接口的对象 c01.collection 的自然顺序
 		static <T> Comparator<T> reverseOrder(Comparator<T> cmp) 
 			返回一个比较器，它强行逆转指定比较器的顺序。 
 	(3)Collections类特牛的方法：
@@ -897,7 +871,7 @@ E. Hashtable
 		但是麻烦。Collections提供特牛的方法，就是给它一个不同步的集合，它返回一个同步的安全的集合
 
 		static <T> Collection<T> synchronizedCollection(Collection<T> c) 
-			返回指定 collection 支持的同步（线程安全的）collection。 
+			返回指定 c01.collection 支持的同步（线程安全的）c01.collection。
 		static <T> List<T>  synchronizedList(List<T> list) 
 			返回指定列表支持的同步（线程安全的）列表。 
 		static <K,V> Map<K,V> synchronizedMap(Map<K,V> m) 
@@ -907,7 +881,8 @@ E. Hashtable
 		static <K,V> SortedMap<K,V> synchronizedSortedMap(SortedMap<K,V> m)
 			返回指定有序映射支持的同步（线程安全的）有序映射。 
 		static <T> SortedSet<T>  synchronizedSortedSet(SortedSet<T> s)
-			返回指定有序 set 支持的同步（线程安全的）有序 set。 
+			返回指定有序 set 支持的同步（线程安全的）有序 set。
+
 18、Arrays类：
 	此类包含用来操作数组（比如排序和搜索）的各种方法。里面都是静态方法。
 	如果指定数组引用为 null，则此类中的方法都会抛出 NullPointerException。
@@ -921,12 +896,13 @@ E. Hashtable
 			  元素出入集合
 			C:如果数组中的元素都是对象，如String，那么数组变成集合后，数组中的元素就直接转成
 			  集合中的元素
+
 19、数组变集合以及集合变数组的对比：
 	(1)数组变集合：
 		方法：static <T> List<T> asList(T... a) 返回一个受指定数组支持的固定大小的列表。
 		好处：可以使用集合的思想和方法操作数组中的元素，数组是一个对象，但是数组中的功能很少
 	(2)集合变数组：
-		方法：Collction中的toArray方法
+		方法：Collection中的toArray方法
 		好处：可以限定对集合元素的操作，防止对集合的元素进行增删，因为数组长度是固定的。
 
 20、Collections类和Arrays类的使用。(重点)
@@ -937,6 +913,7 @@ E. Hashtable
 		把数组变成字符串输出
 		排序
 		二分查找
+
 21、System：
 	(1)描述系统信息的类
 	(2)该类没有构造方法，该类的方法和属性都是静态的
@@ -953,6 +930,7 @@ E. Hashtable
 		static void setOut(PrintStream out) 重新分配“标准”输出流。 
 		static void setProperties(Properties props) 将系统属性设置为 Properties 参数。           
 		static String setProperty(String key, String value) 设置指定键指示的系统属性。
+
 22、Runtime:
 	(1)每个 Java 应用程序都有一个 Runtime 类实例，使应用程序能够与其运行的环境相连接。
 	   可以通过 getRuntime 方法获取当前运行时。 应用程序不能创建自己的 Runtime 类实例。
@@ -964,6 +942,7 @@ E. Hashtable
 		void gc() 运行垃圾回收器。
 		static Runtime getRuntime() 返回与当前 Java 应用程序相关的运行时对象
 		void exit(int status) 通过启动虚拟机的关闭序列，终止当前正在运行的 Java 虚拟机
+
 23、Date:
 	(1)Date接口表示特定的瞬间，精确到毫秒
 	(2)构造方法
@@ -973,6 +952,7 @@ E. Hashtable
 	(3)方法摘要：
 		int compareTo(Date anotherDate) 比较两个日期的顺序。          
 		boolean equals(Object obj) 比较两个日期的相等性。
+
 24、Calendar：
 	(1)直接已知子类： GregorianCalendar 
 	(2)构造方法：
@@ -1071,8 +1051,7 @@ E. Hashtable
 		**枚举的应用：
 			举例：定义一个Weekday的枚举。
 			扩展：枚举类的values,valueOf,name,toString,ordinal等方法
-			     （记住，讲课时要先于自定义方法前介绍，讲课更流畅）
-			总结：枚举是一种特殊的类，其中的每个元素都是该类的一个实例对象。 
+			总结：枚举是一种特殊的类，其中的每个元素都是该类的一个实例对象。
 			      例如可以调用WeekDay.SUN.getClass().getName和WeekDay.class.getName()。
 		**枚举的高级应用：
 			**枚举就相当于一个类，其中也可以定义构造方法、成员变量、普通方法和抽象方法。

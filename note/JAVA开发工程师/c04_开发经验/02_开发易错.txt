@@ -1,0 +1,26 @@
+1. 将数组转化为一个列表时。(开发易错)
+        List<String> list = Arrays.asList(arr);
+        Arrays.asList()会返回一个ArrayList对象，ArrayList类是Arrays的一个私有静态类，而不是java.util.ArrayList类，
+        java.util.Arrays.ArrayList类有set()、get()、contains()方法，但是没有增加元素的方法，所以它的大小是固定的，
+        想要创建一个真正的ArrayList类，你应该这样做:
+        ArrayList<String> arrayList = new ArrayList<String>(Arrays.asList(arr));
+        ArrayList的构造方法可以接受一个集合类型，刚好它也是java.util.Arrays.ArrayList的超类。
+
+2. 在一个循环中删除一个列表中的元素。(开发易错)
+          ArrayList<String> list = new ArrayList<String>(Arrays.asList("a","b","c","d"));
+            for(String s:list){
+                if(s.equals("a")){
+                    list.remove(s);
+                }
+            }
+        它会抛出一个ConcurrentModificationException异常。
+        相反下面的显示正常：
+                ArrayList<String> list = new ArrayList<String>(Arrays.asList("a","b","c","d"));
+                Iterator<String> iter = list.iterator();
+                while(iter.hasNext()){
+                        String s = iter.next();
+                        if(s.equals("a")){
+                            iter.remove();
+                    }
+                }
+        .next()必须在.remove()之前调用。在一个foreach循环中，编译器会使.next()在删除元素之后被调用，因此就会抛出ConcurrentModificationException异常。

@@ -3,7 +3,7 @@ package c01.collection;
 import java.util.*;
 
 /**
- * @Description: javaÀà×÷ÓÃÃèÊö
+ * @Description: javaç±»ä½œç”¨æè¿°
  * @Author: LT
  * @CreateDate: 2019/12/3 17:14
  * @Version: 1.0.0

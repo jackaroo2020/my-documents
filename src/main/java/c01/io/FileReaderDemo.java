@@ -3,7 +3,7 @@ package c01.io;
 import java.io.*;
 
 /**
- * @Description: javaÀà×÷ÓÃÃèÊö
+ * @Description: javaç±»ä½œç”¨æè¿°
  * @Author: LT
  * @CreateDate: 2019/12/3 17:50
  * @Version: 1.0.0
@@ -11,8 +11,8 @@ import java.io.*;
 public class FileReaderDemo {
 
     /**
-     * ¶ÁÈ¡Ó²ÅÌÉÏµÄÎÄ±¾ÎÄ¼ş£¬²¢½«Êı¾İ´òÓ¡ÔÚ¿ØÖÆÌ¨
-     * µÚÒ»ÖÖ¶ÁÈ¡·½·¨£ºÒ»¸öÒ»¸ö×Ö½ÚµÄ¶Á
+     * è¯»å–ç¡¬ç›˜ä¸Šçš„æ–‡æœ¬æ–‡ä»¶ï¼Œå¹¶å°†æ•°æ®æ‰“å°åœ¨æ§åˆ¶å°
+     * ç¬¬ä¸€ç§è¯»å–æ–¹æ³•ï¼šä¸€ä¸ªä¸€ä¸ªå­—èŠ‚çš„è¯»
      *
      * @throws IOException
      */
@@ -26,8 +26,8 @@ public class FileReaderDemo {
     }
 
     /**
-     * ¶ÁÈ¡Ó²ÅÌÉÏµÄÎÄ±¾ÎÄ¼ş£¬²¢½«Êı¾İ´òÓ¡ÔÚ¿ØÖÆÌ¨
-     * µÚ¶şÖÖ¶ÁÈ¡·½·¨£ºÀûÓÃÊı×éÀ´Ìá¸ßĞ§ÂÊ
+     * è¯»å–ç¡¬ç›˜ä¸Šçš„æ–‡æœ¬æ–‡ä»¶ï¼Œå¹¶å°†æ•°æ®æ‰“å°åœ¨æ§åˆ¶å°
+     * ç¬¬äºŒç§è¯»å–æ–¹æ³•ï¼šåˆ©ç”¨æ•°ç»„æ¥æé«˜æ•ˆç‡
      *
      * @throws IOException
      */
@@ -42,12 +42,12 @@ public class FileReaderDemo {
     }
 
     /**
-     * ¿½±´ÎÄ±¾ÎÄ¼ş
-     * 		ÀûÓÃ»º³åÇøÌá¸ßÊı¾İ¶ÁĞ´Ğ§ÂÊ
-     * 		(ÎŞ»º³åÇø¾ÍÏàµ±ÓÚÒ»µÎÒ»µÎµÄºÈË®£¬ÓĞ»º³åÇø¾ÍÏàµ±ÓÚÒ»±­Ò»±­µÄºÈË®)
+     * æ‹·è´æ–‡æœ¬æ–‡ä»¶
+     * 		åˆ©ç”¨ç¼“å†²åŒºæé«˜æ•°æ®è¯»å†™æ•ˆç‡
+     * 		(æ— ç¼“å†²åŒºå°±ç›¸å½“äºä¸€æ»´ä¸€æ»´çš„å–æ°´ï¼Œæœ‰ç¼“å†²åŒºå°±ç›¸å½“äºä¸€æ¯ä¸€æ¯çš„å–æ°´)
      *
-     * @param sourceFileDir  Ô´Ä¿Â¼
-     * @param dirFileDir Ä¿±êÄ¿Â¼È«Â·¾¶
+     * @param sourceFileDir  æºç›®å½•
+     * @param dirFileDir ç›®æ ‡ç›®å½•å…¨è·¯å¾„
      */
     public static void copyFile(String sourceFileDir,String dirFileDir) throws IOException {
         BufferedReader fileReader = new BufferedReader(new FileReader(sourceFileDir));

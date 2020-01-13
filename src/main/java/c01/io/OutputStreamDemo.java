@@ -5,7 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
- * @Description: javaÀà×÷ÓÃÃèÊö
+ * @Description: javaç±»ä½œç”¨æè¿°
  * @Author: LT
  * @CreateDate: 2019/12/6 10:16
  * @Version: 1.0.0
@@ -18,27 +18,27 @@ public class OutputStreamDemo {
     }
 
     /**
-     * ĞèÇó1£ºÔÚÓ²ÅÌÉÏ´´½¨Ò»¸öÎÄ¼ş²¢Ğ´ÈëĞÅÏ¢(×Ö½ÚÁ÷Ğ´ÈëÊ±Ã»ÓĞË¢ĞÂ
+     * éœ€æ±‚1ï¼šåœ¨ç¡¬ç›˜ä¸Šåˆ›å»ºä¸€ä¸ªæ–‡ä»¶å¹¶å†™å…¥ä¿¡æ¯(å­—èŠ‚æµå†™å…¥æ—¶æ²¡æœ‰åˆ·æ–°
      */
     public static void writer(String filePath) throws IOException {
         FileOutputStream fos = new FileOutputStream(filePath);
-        // 97 ¶ÔÓ¦×Ö·û a
+        // 97 å¯¹åº”å­—ç¬¦ a
         fos.write(97);
-        fos.write("×Ö½ÚÊı×é".getBytes());
+        fos.write("å­—èŠ‚æ•°ç»„".getBytes());
         fos.close();
     }
 
     /**
-     * ÔÚÓ²ÅÌÒÑÓĞÎÄ¼şÉÏĞøĞ´Êı¾İ(×Ö½ÚÁ÷Ğ´ÈëÊ±Ã»ÓĞË¢ĞÂ)
+     * åœ¨ç¡¬ç›˜å·²æœ‰æ–‡ä»¶ä¸Šç»­å†™æ•°æ®(å­—èŠ‚æµå†™å…¥æ—¶æ²¡æœ‰åˆ·æ–°)
      *
      * @param filePath
      * @throws FileNotFoundException
      */
     public static void writeAppend(String filePath) throws IOException {
         FileOutputStream fos = new FileOutputStream(filePath,true);
-        // 97 ¶ÔÓ¦×Ö·û a
+        // 97 å¯¹åº”å­—ç¬¦ a
         fos.write(98);
-        fos.write("ĞøĞ´×Ö½ÚÊı×é".getBytes());
+        fos.write("ç»­å†™å­—èŠ‚æ•°ç»„".getBytes());
         fos.close();
     }
 }

@@ -5,7 +5,7 @@ import java.util.Properties;
 import java.util.Set;
 
 /**
- * @Description: javaÀà×÷ÓÃÃèÊö
+ * @Description: javaç±»ä½œç”¨æè¿°
  * @Author: LT
  * @CreateDate: 2019/12/6 14:05
  * @Version: 1.0.0
@@ -15,11 +15,11 @@ public class PropertiesDemo {
     public static void show()
     {
         Properties prop = new Properties();
-        prop.setProperty("ÕÅÈı","26");
-        prop.setProperty("ÀîËÄ","30");
-        prop.setProperty("ÍõÎå","35");
+        prop.setProperty("å¼ ä¸‰","26");
+        prop.setProperty("æå››","30");
+        prop.setProperty("ç‹äº”","35");
         System.out.println(prop);
-        String value = prop.getProperty("ÕÅÈı");
+        String value = prop.getProperty("å¼ ä¸‰");
         System.out.println(value);
 
         Set<String> keys = prop.stringPropertyNames();
@@ -32,46 +32,46 @@ public class PropertiesDemo {
 
 
     /**
-     *  ĞèÇó£º¼ÇÂ¼Ó¦ÓÃ³ÌĞòµÄÊ¹ÓÃ´ÎÊı£¬Èç¹ûÊ¹ÓÃ´ÎÊıÒÑµ½£¬ÔòÌáÊ¾ÓÃ»§×¢²á¡£
-     *     Ë¼Â·£º
-     *             **µÚÒ»´ÎÊ¹ÓÃÊ±½¨Á¢Ò»¸öÅäÖÃÎÄ¼şÓÃÓÚ¼ÇÂ¼Ê¹ÓÃ´ÎÊı
-     *    **Ã¿´ÎÊ¹ÓÃ¶¼¼ÓÔØ¸ÃÅäÖÃÎÄ¼ş£¬²¢ÏÈÅĞ¶ÏÒÑÊ¹ÓÃ´ÎÊı
-     *    **Ã¿´ÎÊ¹ÓÃÍêÊ¹ÓÃ´ÎÊı¼Ó1£¬Ğ´ÈëÅäÖÃÎÄ¼ş
+     *  éœ€æ±‚ï¼šè®°å½•åº”ç”¨ç¨‹åºçš„ä½¿ç”¨æ¬¡æ•°ï¼Œå¦‚æœä½¿ç”¨æ¬¡æ•°å·²åˆ°ï¼Œåˆ™æç¤ºç”¨æˆ·æ³¨å†Œã€‚
+     *     æ€è·¯ï¼š
+     *             **ç¬¬ä¸€æ¬¡ä½¿ç”¨æ—¶å»ºç«‹ä¸€ä¸ªé…ç½®æ–‡ä»¶ç”¨äºè®°å½•ä½¿ç”¨æ¬¡æ•°
+     *    **æ¯æ¬¡ä½¿ç”¨éƒ½åŠ è½½è¯¥é…ç½®æ–‡ä»¶ï¼Œå¹¶å…ˆåˆ¤æ–­å·²ä½¿ç”¨æ¬¡æ•°
+     *    **æ¯æ¬¡ä½¿ç”¨å®Œä½¿ç”¨æ¬¡æ•°åŠ 1ï¼Œå†™å…¥é…ç½®æ–‡ä»¶
      * @throws IOException
      */
     public static void useProp() throws IOException {
-        //¶¨ÒåProperties£¬ÓÃÀ´ºÍIOÁ÷½áºÏ
+        //å®šä¹‰Propertiesï¼Œç”¨æ¥å’ŒIOæµç»“åˆ
         Properties prop = new Properties();
-        //ÅäÖÃÎÄ¼ş
+        //é…ç½®æ–‡ä»¶
         File file = new File("G:\\test\\time.ini");
         if(!file.exists()) {
-            //Èç¹ûÎÄ¼ş²»´æÔÚÔò´´½¨ÎÄ¼ş(ÓÃÓÚµÚÒ»´ÎÊ¹ÓÃÊ±´´½¨ÎÄ¼ş)
+            //å¦‚æœæ–‡ä»¶ä¸å­˜åœ¨åˆ™åˆ›å»ºæ–‡ä»¶(ç”¨äºç¬¬ä¸€æ¬¡ä½¿ç”¨æ—¶åˆ›å»ºæ–‡ä»¶)
             file.createNewFile();
         }
-        //¶¨Òå×Ö½Ú¶ÁÈ¡Á÷£¬¶ÁÈ¡ÅäÖÃÎÄ¼şÖĞ¼ÇÂ¼µÄÊ¹ÓÃ´ÎÊı
+        //å®šä¹‰å­—èŠ‚è¯»å–æµï¼Œè¯»å–é…ç½®æ–‡ä»¶ä¸­è®°å½•çš„ä½¿ç”¨æ¬¡æ•°
         FileInputStream fis = new FileInputStream(file);
-        //ÔØÈëÁ÷£¬ÒÔ»ñÈ¡ÎÄ¼şÖĞÅäÖÃµÄ¼üÖµ¶Ô
+        //è½½å…¥æµï¼Œä»¥è·å–æ–‡ä»¶ä¸­é…ç½®çš„é”®å€¼å¯¹
         prop.load(fis);
-        //¶¨ÒåÊ¹ÓÃ´ÎÊı
+        //å®šä¹‰ä½¿ç”¨æ¬¡æ•°
         int count = 0;
-        //Í¨¹ı¼ü»ñÈ¡Öµ
+        //é€šè¿‡é”®è·å–å€¼
         String countValue = prop.getProperty("time");
-        //µÚÒ»´ÎÊ±countValueÎªnull
+        //ç¬¬ä¸€æ¬¡æ—¶countValueä¸ºnull
         if(countValue!=null){
-            //½«×Ö·û´®´ÎÊı±ä³ÉÊı×Ö´ÎÊı
+            //å°†å­—ç¬¦ä¸²æ¬¡æ•°å˜æˆæ•°å­—æ¬¡æ•°
             count = Integer.parseInt(countValue);
             if(count>3){
-                System.out.println("ÄúÊ¹ÓÃ´ÎÊıÒÑµ½£¬¼ÌĞøÊ¹ÓÃÇë×¢²á£¡");
+                System.out.println("æ‚¨ä½¿ç”¨æ¬¡æ•°å·²åˆ°ï¼Œç»§ç»­ä½¿ç”¨è¯·æ³¨å†Œï¼");
                 return;
             }
         }
-        //Èç¹ûÊ¹ÓÃ´ÎÊıÎ´µ½Ôò´ÎÊı¼Ó1
+        //å¦‚æœä½¿ç”¨æ¬¡æ•°æœªåˆ°åˆ™æ¬¡æ•°åŠ 1
         count++;
-        //ÅäÖÃĞÂµÄ¼üÖµ¶Ô
+        //é…ç½®æ–°çš„é”®å€¼å¯¹
         prop.setProperty("time", count+"");
         FileWriter fos = new FileWriter(file);
-        //½«ĞÂµÄ¼üÖµ¶ÔĞ´ÈëÎÄ¼ş
-        prop.store(fos, "ÕâÊÇÓ¦ÓÃ³ÌĞòÊ¹ÓÃ´ÎÊıµÄÅäÖÃÎÄ¼ş");
+        //å°†æ–°çš„é”®å€¼å¯¹å†™å…¥æ–‡ä»¶
+        prop.store(fos, "è¿™æ˜¯åº”ç”¨ç¨‹åºä½¿ç”¨æ¬¡æ•°çš„é…ç½®æ–‡ä»¶");
         fis.close();
         fos.close();
     }
@@ -79,11 +79,11 @@ public class PropertiesDemo {
     public static void write() throws IOException
     {
         OutputStreamWriter osw1 = new OutputStreamWriter(new FileOutputStream("gbk.txt"),"GBK");
-        osw1.write("ÄãºÃ");
+        osw1.write("ä½ å¥½");
         osw1.close();
 
         OutputStreamWriter osw2 = new OutputStreamWriter(new FileOutputStream("utf-8.txt"),"UTF-8");
-        osw2.write("ÄãºÃ");
+        osw2.write("ä½ å¥½");
         osw2.close();
     }
     public static void read() throws IOException
@@ -95,32 +95,32 @@ public class PropertiesDemo {
     }
 
     public static void encodeTest() throws UnsupportedEncodingException {
-        //±àÂë½âÂë1£ºÄ¬ÈÏ±àÂë
-        String str1 = "ÄãºÃ";
-        byte[] buf1 = str1.getBytes();//Ä¬ÈÏ½âÂë£ºUnicode£¬ËÄ¸ö×Ö½Ú
+        //ç¼–ç è§£ç 1ï¼šé»˜è®¤ç¼–ç 
+        String str1 = "ä½ å¥½";
+        byte[] buf1 = str1.getBytes();//é»˜è®¤è§£ç ï¼šUnicodeï¼Œå››ä¸ªå­—èŠ‚
 
-        //±àÂë½âÂë2£ºÖ¸¶¨±àÂë
-        String str2 = "ÄãºÃ";
-        byte[] buf2 = str2.getBytes("UTF-8");//Ö¸¶¨½âÂë£ºUTF-8,Áù¸ö×Ö½Ú
+        //ç¼–ç è§£ç 2ï¼šæŒ‡å®šç¼–ç 
+        String str2 = "ä½ å¥½";
+        byte[] buf2 = str2.getBytes("UTF-8");//æŒ‡å®šè§£ç ï¼šUTF-8,å…­ä¸ªå­—èŠ‚
 
 
-        //±àÂë½âÂë3£º±àÂëÕıÈ·½âÂë´íÎó
-        String str3 = "ÄãºÃ";
-        byte[] buf3 = str3.getBytes("GBK");//Ö¸¶¨±àÂë£ºGBK,ËÄ¸ö×Ö½Ú
-        String str13 = new String(buf3,"ISO8859-1");//´íÎó½âÂë
+        //ç¼–ç è§£ç 3ï¼šç¼–ç æ­£ç¡®è§£ç é”™è¯¯
+        String str3 = "ä½ å¥½";
+        byte[] buf3 = str3.getBytes("GBK");//æŒ‡å®šç¼–ç ï¼šGBK,å››ä¸ªå­—èŠ‚
+        String str13 = new String(buf3,"ISO8859-1");//é”™è¯¯è§£ç 
 
-        //±àÂë½âÂë4£º´íÎó±àÂëÕıÈ·½âÂë
-        String str4 = "ÄãºÃ";
-        byte[] buf4 = str4.getBytes("ISO8859-1");//´íÎó±àÂë
-        String str14 = new String(buf4,"GBK");//ÕıÈ·½âÂë£¬¶Á²»³öÀ´
+        //ç¼–ç è§£ç 4ï¼šé”™è¯¯ç¼–ç æ­£ç¡®è§£ç 
+        String str4 = "ä½ å¥½";
+        byte[] buf4 = str4.getBytes("ISO8859-1");//é”™è¯¯ç¼–ç 
+        String str14 = new String(buf4,"GBK");//æ­£ç¡®è§£ç ï¼Œè¯»ä¸å‡ºæ¥
 
-        //±àÂë½âÂë5£º±àÂë¶ÔÁË£¬µ«ÊÇ½âÂë´íÎóÁË£¬ÔõÃ´°ìÄØ£¿
-        //´ËÊ±¿ÉÒÔ½«´íÎóµÄ½âÂëÔÙ´í±à»ØÈ¥£¬ÔØÓÃÕıÈ·±àÂë½âÂë
-        String str5 = "ÄãºÃ";
-        byte[] buf5 = str5.getBytes("GBK");//ÕıÈ·±àÂë
-        String str6 = new String(buf5,"ISO8859-1");//´íÎó½âÂë£¬¶Á²»³öÀ´
-        byte[] buf6 = str6.getBytes("ISO8859-1");//ÔÙ´íÎó±àÂë
-        String str7 = new String(buf6,"GBK");//ÔÙÕıÈ·½âÂë£¬ÕâÑù¾Í¿ÉÒÔ¶Á³öÀ´ÁË
+        //ç¼–ç è§£ç 5ï¼šç¼–ç å¯¹äº†ï¼Œä½†æ˜¯è§£ç é”™è¯¯äº†ï¼Œæ€ä¹ˆåŠå‘¢ï¼Ÿ
+        //æ­¤æ—¶å¯ä»¥å°†é”™è¯¯çš„è§£ç å†é”™ç¼–å›å»ï¼Œè½½ç”¨æ­£ç¡®ç¼–ç è§£ç 
+        String str5 = "ä½ å¥½";
+        byte[] buf5 = str5.getBytes("GBK");//æ­£ç¡®ç¼–ç 
+        String str6 = new String(buf5,"ISO8859-1");//é”™è¯¯è§£ç ï¼Œè¯»ä¸å‡ºæ¥
+        byte[] buf6 = str6.getBytes("ISO8859-1");//å†é”™è¯¯ç¼–ç 
+        String str7 = new String(buf6,"GBK");//å†æ­£ç¡®è§£ç ï¼Œè¿™æ ·å°±å¯ä»¥è¯»å‡ºæ¥äº†
     }
     public static void main(String[] args) throws IOException {
         //show();

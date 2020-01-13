@@ -4,7 +4,7 @@ package c01.io;
 import java.io.*;
 
 /**
- * @Description: javaÀà×÷ÓÃÃèÊö
+ * @Description: javaç±»ä½œç”¨æè¿°
  * @Author: LT
  * @CreateDate: 2019/12/6 10:39
  * @Version: 1.0.0
@@ -13,13 +13,13 @@ public class InputStreamDemo {
 
     public static void main(String[] args) throws IOException {
         //read("g:\\fileStream.txt");
-        //copy1("G:\\ÖÜ½ÜÂ× - ¹ì¼£.kgm","G:\\ÖÜ½ÜÂ× - ¹ì¼£copy.kgm");
-        copy2("G:\\ÖÜ½ÜÂ× - ¹ì¼£.kgm","G:\\ÖÜ½ÜÂ× - ¹ì¼£copy.kgm");
+        //copy1("G:\\å‘¨æ°ä¼¦ - è½¨è¿¹.kgm","G:\\å‘¨æ°ä¼¦ - è½¨è¿¹copy.kgm");
+        copy2("G:\\å‘¨æ°ä¼¦ - è½¨è¿¹.kgm","G:\\å‘¨æ°ä¼¦ - è½¨è¿¹copy.kgm");
     }
 
     /**
-     * ¶ÁÈ¡Ó²ÅÌÉÏµÄÎÄ¼ş
-     * **µÚÒ»ÖÖ¶Á·¨£ºÒ»¸ö×Ö½ÚÒ»¸ö×Ö½ÚµÄ¶Á(´ËÖÖ¶Á·¨Âı)(ÖĞÎÄÂÒÂë)
+     * è¯»å–ç¡¬ç›˜ä¸Šçš„æ–‡ä»¶
+     * **ç¬¬ä¸€ç§è¯»æ³•ï¼šä¸€ä¸ªå­—èŠ‚ä¸€ä¸ªå­—èŠ‚çš„è¯»(æ­¤ç§è¯»æ³•æ…¢)(ä¸­æ–‡ä¹±ç )
      *
      * @param filePath
      */
@@ -33,7 +33,7 @@ public class InputStreamDemo {
     }
 
     /**
-     * ÀûÓÃ×Ö½ÚÊı×é¶Á(´ËÖÖ¶Á·¨Ğ§ÂÊÓĞÒ»¶¨Ìá¸ß)
+     * åˆ©ç”¨å­—èŠ‚æ•°ç»„è¯»(æ­¤ç§è¯»æ³•æ•ˆç‡æœ‰ä¸€å®šæé«˜)
      *
      * @param filePath
      * @throws IOException
@@ -49,7 +49,7 @@ public class InputStreamDemo {
     }
 
     /**
-     * ¿½±´×Ö½ÚÎÄ¼ş£¬ÈçÍ¼Æ¬»òÕßMP3»òÕßµçÓ°
+     * æ‹·è´å­—èŠ‚æ–‡ä»¶ï¼Œå¦‚å›¾ç‰‡æˆ–è€…MP3æˆ–è€…ç”µå½±
      *
      * @param sourceFile
      * @param targetFile
@@ -69,7 +69,7 @@ public class InputStreamDemo {
     }
 
     /**
-     * ¿½±´×Ö½ÚÎÄ¼ş£¬ÈçÍ¼Æ¬»òÕßMP3»òÕßµçÓ°
+     * æ‹·è´å­—èŠ‚æ–‡ä»¶ï¼Œå¦‚å›¾ç‰‡æˆ–è€…MP3æˆ–è€…ç”µå½±
      *
      * @param sourceFile
      * @param targetFile

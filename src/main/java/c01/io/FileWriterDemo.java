@@ -4,7 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- * @Description: javaÀà×÷ÓÃÃèÊö
+ * @Description: javaç±»ä½œç”¨æè¿°
  * @Author: LT
  * @CreateDate: 2019/12/3 17:27
  * @Version: 1.0.0
@@ -18,16 +18,16 @@ public class FileWriterDemo {
 
     public static void writer1() throws IOException {
         FileWriter fileWriter = new FileWriter("g:\\fileWriter.txt");
-        fileWriter.write("²âÊÔ¿´ÏÂ\r\n");
-        fileWriter.write("×Ö½ÚÊı×é\r\n".toCharArray());
+        fileWriter.write("æµ‹è¯•çœ‹ä¸‹\r\n");
+        fileWriter.write("å­—èŠ‚æ•°ç»„\r\n".toCharArray());
         fileWriter.flush();
         fileWriter.close();
     }
 
     public static void  writer2() throws IOException {
         FileWriter fw = new FileWriter("g:\\filewriter.txt",true);
-        fw.write("»¹¿ÉÒÔĞøĞ´ĞÅÏ¢\r\n");
-        fw.write("Ò²¿ÉÒÔĞ´Èë×Ö·ûÊı×é\r\n".toCharArray());
+        fw.write("è¿˜å¯ä»¥ç»­å†™ä¿¡æ¯\r\n");
+        fw.write("ä¹Ÿå¯ä»¥å†™å…¥å­—ç¬¦æ•°ç»„\r\n".toCharArray());
         fw.flush();
         fw.close();
     }

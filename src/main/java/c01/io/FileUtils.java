@@ -7,7 +7,7 @@ import java.io.FilenameFilter;
 import java.util.ArrayList;
 
 /**
- * @Description: FileÀà³£¼ûĞèÇó
+ * @Description: Fileç±»å¸¸è§éœ€æ±‚
  * @Author: LT
  * @CreateDate: 2019/12/6 11:28
  * @Version: 1.0.0
@@ -19,7 +19,7 @@ public class FileUtils {
 
 
     /**
-     * (1)ÎÄ¼şÃû¹ıÂË:ÁĞ³ö¸ø¶¨Ä¿Â¼µÄËùÓĞ.txtÎÄ¼ş
+     * (1)æ–‡ä»¶åè¿‡æ»¤:åˆ—å‡ºç»™å®šç›®å½•çš„æ‰€æœ‰.txtæ–‡ä»¶
      *
      * @param file
      */
@@ -34,8 +34,8 @@ public class FileUtils {
     }
 
     /**
-     * ÁĞ³öÖ¸¶¨Ä¿Â¼ÏÂµÄËùÓĞÎÄ¼şºÍÎÄ¼ş¼Ğ(µİ¹é)
-     * ²»´ø²ã´Îµİ¹é
+     * åˆ—å‡ºæŒ‡å®šç›®å½•ä¸‹çš„æ‰€æœ‰æ–‡ä»¶å’Œæ–‡ä»¶å¤¹(é€’å½’)
+     * ä¸å¸¦å±‚æ¬¡é€’å½’
      * @param dir
      */
     public static  void showDir(File dir) {
@@ -51,7 +51,7 @@ public class FileUtils {
     }
 
     /**
-     * É¾³ı´øÄÚÈİµÄÄ¿Â¼
+     * åˆ é™¤å¸¦å†…å®¹çš„ç›®å½•
      *
      * @param dir
      */
@@ -68,15 +68,15 @@ public class FileUtils {
     }
 
     /**
-     * )ĞèÇó£º½«ÖÆ¶¨Ä¿Â¼ÏÂµÄjavaÎÄ¼şµÄ¾ø¶ÔÂ·¾¶´æ´¢µ½ÎÄ±¾ÎÄ¼şÖĞ¡£
-     * 	   Ë¼Â·£º
-     * 	   **¶ÔÖ¸¶¨Ä¿Â¼½øĞĞµİ¹é
-     * 	   **»ñÈ¡µİ¹é¹ı³ÌÖĞËùÓĞjavaÎÄ¼şµÄÂ·¾¶
-     * 	   **½«ÕâĞ©Â·¾¶´æ´¢µ½¼¯ºÏÖĞ
-     * 	   **½«¼¯ºÏÖĞµÄÊı¾İĞ´ÈëÎÄ¼şÖĞ
+     * )éœ€æ±‚ï¼šå°†åˆ¶å®šç›®å½•ä¸‹çš„javaæ–‡ä»¶çš„ç»å¯¹è·¯å¾„å­˜å‚¨åˆ°æ–‡æœ¬æ–‡ä»¶ä¸­ã€‚
+     * 	   æ€è·¯ï¼š
+     * 	   **å¯¹æŒ‡å®šç›®å½•è¿›è¡Œé€’å½’
+     * 	   **è·å–é€’å½’è¿‡ç¨‹ä¸­æ‰€æœ‰javaæ–‡ä»¶çš„è·¯å¾„
+     * 	   **å°†è¿™äº›è·¯å¾„å­˜å‚¨åˆ°é›†åˆä¸­
+     * 	   **å°†é›†åˆä¸­çš„æ•°æ®å†™å…¥æ–‡ä»¶ä¸­
      */
 
-    //¶ÔÖ¸¶¨Ä¿Â¼½øĞĞµİ¹é²¢½«ËùÒÔJavaÎÄ¼ş´æ´¢µ½¼¯ºÏÖĞ
+    //å¯¹æŒ‡å®šç›®å½•è¿›è¡Œé€’å½’å¹¶å°†æ‰€ä»¥Javaæ–‡ä»¶å­˜å‚¨åˆ°é›†åˆä¸­
     public static void getFileName(File file,ArrayList<File> arraylist){
         File[] files = file.listFiles();
         for (int i = 0; i < files.length; i++) {
@@ -89,7 +89,7 @@ public class FileUtils {
             }
         }
     }
-    //½«¼¯ºÏÖĞËùÓĞÊı¾İ´æ´¢µ½ĞÂÎÄ¼şÖĞ
+    //å°†é›†åˆä¸­æ‰€æœ‰æ•°æ®å­˜å‚¨åˆ°æ–°æ–‡ä»¶ä¸­
     public static void saveFileToNewDir(ArrayList<File> arraylist, File newDir){
         BufferedWriter bufw = null;
         try {
@@ -101,14 +101,14 @@ public class FileUtils {
                 bufw.flush();
             }
         } catch (Exception e) {
-            System.out.println("ÎÄ¼şĞ´ÈëÊ§°Ü");
+            System.out.println("æ–‡ä»¶å†™å…¥å¤±è´¥");
         }finally{
             try {
                 if(bufw!=null) {
                     bufw.close();
                 }
             } catch (Exception e2) {
-                System.out.println("ÎÄ¼şĞ´ÈëÁ÷¹Ø±ÕÊ§°Ü");
+                System.out.println("æ–‡ä»¶å†™å…¥æµå…³é—­å¤±è´¥");
             }
         }
     }
@@ -118,7 +118,7 @@ public class FileUtils {
         //for (int i = 0; i < names.length; i++) {
         //    System.out.println(names[i]);
         //}
-        // ÁĞ³öÎÄ¼ş
+        // åˆ—å‡ºæ–‡ä»¶
         //showDir(new File("G:\\"));
         //removeDir(new File("G:\\test"));
     }

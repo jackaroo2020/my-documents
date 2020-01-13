@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 
 /**
- * @Description: javaÀà×÷ÓÃÃèÊö
+ * @Description: javaç±»ä½œç”¨æè¿°
  * @Author: LT
  * @CreateDate: 2019/12/3 13:57
  * @Version: 1.0.0
@@ -16,13 +16,13 @@ public class Demo02 {
 
         ArrayList<String> arrayList = new ArrayList<String>(Arrays.asList("a","b","c","d"));
 
-        // 1. µ±Ò»¸öÔªËØ±»É¾³ıÊ±£¬ÁĞ±íµÄ´óĞ¡ËõĞ¡²¢ÇÒÏÂ±ê±ä»¯£¬ËùÒÔµ±ÄãÏëÒªÔÚÒ»¸öÑ­»·ÖĞÓÃÏÂ±êÉ¾³ı¶à¸öÔªËØµÄÊ±ºò£¬Ëü²¢²»»áÕı³£µÄÉúĞ§¡£
+        // 1. å½“ä¸€ä¸ªå…ƒç´ è¢«åˆ é™¤æ—¶ï¼Œåˆ—è¡¨çš„å¤§å°ç¼©å°å¹¶ä¸”ä¸‹æ ‡å˜åŒ–ï¼Œæ‰€ä»¥å½“ä½ æƒ³è¦åœ¨ä¸€ä¸ªå¾ªç¯ä¸­ç”¨ä¸‹æ ‡åˆ é™¤å¤šä¸ªå…ƒç´ çš„æ—¶å€™ï¼Œå®ƒå¹¶ä¸ä¼šæ­£å¸¸çš„ç”Ÿæ•ˆã€‚
         //for (int i = 0; i < arrayList.size(); i++) {
         //    arrayList.remove(i);
         //}
         //System.out.println(arrayList);
 
-        // 2¡¢Exception in thread "main" java.util.ConcurrentModificationException
+        // 2ã€Exception in thread "main" java.util.ConcurrentModificationException
         //	at java.util.ArrayList$Itr.checkForComodification(ArrayList.java:901)
         //	at java.util.ArrayList$Itr.next(ArrayList.java:851)
         //	at c04.Demo02.main(Demo02.java:26)
@@ -33,7 +33,7 @@ public class Demo02 {
         //}
         //System.out.println(arrayList);
 
-        // 3¡¢.next()±ØĞëÔÚ.remove()Ö®Ç°µ÷ÓÃ¡£ÔÚÒ»¸öforeachÑ­»·ÖĞ£¬±àÒëÆ÷»áÊ¹.next()ÔÚÉ¾³ıÔªËØÖ®ºó±»µ÷ÓÃ£¬Òò´Ë¾Í»áÅ×³öConcurrentModificationExceptionÒì³£
+        // 3ã€.next()å¿…é¡»åœ¨.remove()ä¹‹å‰è°ƒç”¨ã€‚åœ¨ä¸€ä¸ªforeachå¾ªç¯ä¸­ï¼Œç¼–è¯‘å™¨ä¼šä½¿.next()åœ¨åˆ é™¤å…ƒç´ ä¹‹åè¢«è°ƒç”¨ï¼Œå› æ­¤å°±ä¼šæŠ›å‡ºConcurrentModificationExceptionå¼‚å¸¸
         Iterator<String> it = arrayList.iterator();
         while (it.hasNext()) {
             String s = it.next();
